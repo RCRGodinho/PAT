@@ -4,10 +4,7 @@
  */
 package gestão.de.stock.teste;
 
-import static gestão.de.stock.teste.GestãodestockTESTE.driver;
-import static gestão.de.stock.teste.GestãodestockTESTE.orcUrl;
-import static gestão.de.stock.teste.GestãodestockTESTE.pass;
-import static gestão.de.stock.teste.GestãodestockTESTE.user;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,30 +28,8 @@ public class Stock extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI bi =(BasicInternalFrameUI)this.getUI();  
         bi.setNorthPane(null);
-        
-        
-        
     }
     
-    void getStock(Connection con, Statement stmt, ResultSet rs) throws ClassNotFoundException, SQLException{
-        Class.forName(GestãodestockTESTE.driver);
-        
-     
-        con = java.sql.DriverManager.getConnection(GestãodestockTESTE.orcUrl,GestãodestockTESTE.user,GestãodestockTESTE.pass);
-           
-           stmt = con.createStatement();
-           
-           String sql = "SELECT * FROM Armazem";
-           rs = stmt.executeQuery(sql);
-           
-           while(rs.next())
-           {
-               texto.setText(rs.getInt(1)+ " | " + rs.getString(2) + " | " + rs.getInt(3) + " | " + rs.getInt(4));
-           }
-
-    
-        System.out.println("");
-}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

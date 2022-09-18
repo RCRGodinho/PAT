@@ -13,13 +13,6 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author PAT
  */
 public class GestãodestockTESTE extends javax.swing.JFrame {
-    
-    //variaveis
-    static final String orcUrl = "jdbc:oracle:thin:@//localhost:1521/teste";
-    static final String driver = "oracle.jdbc.OracleDriver";
-    static final String user = "dbadmin";
-    static final String pass = "admin";
-
     //variaveis GUI
     Color onDef;
     Color onClick;
@@ -202,30 +195,7 @@ public class GestãodestockTESTE extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         
-        // Fazer a conexão à BD
         
-        
-        Connection con = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        
-       try
-       {
-           Class.forName(driver);
-           con = java.sql.DriverManager.getConnection(orcUrl,user,pass);
-       }
-       catch(Exception exp)
-       {
-           throw new Exception (exp.getMessage());
-       }finally
-       {
-           if(rs!=null) rs.close();
-           if(stmt!=null) stmt.close();
-           if(con!=null) con.close();
-           
-       }
 
 
         /* Create and display the form */

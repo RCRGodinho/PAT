@@ -4,6 +4,10 @@
  */
 package gestão.de.stock.teste;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /**
  *
  * @author PAT
@@ -33,7 +37,36 @@ public class Conexao {
     }
 
     public Conexao() {
+        
     }
+    
+    /*
+    
+    // Fazer a conexão à BD
+        
+        
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        
+       try
+       {
+           Class.forName(driver);
+           con = java.sql.DriverManager.getConnection(orcUrl,user,pass);
+       }
+       catch(Exception exp)
+       {
+           throw new Exception (exp.getMessage());
+       }finally
+       {
+           if(rs!=null) rs.close();
+           if(stmt!=null) stmt.close();
+           if(con!=null) con.close();
+           
+       }
+       */
 
     
 
