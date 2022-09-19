@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 /**
  *
@@ -23,6 +22,8 @@ public class Conexao {
     static final String user = "dbadmin";
     static final String pass = "admin";
     Connection con = null;
+    Statement stmt = null;
+    ResultSet rs = null;
 
      static String getOrcUrl() {
         return orcUrl;
@@ -40,14 +41,24 @@ public class Conexao {
         return pass;
     }
      
-     int fazConexao(String st) throws SQLException
+     boolean fazConexao(String st) throws SQLException, Exception
      { 
-        //variavel de conexão à bd
-    con = DriverManager.getConnection(Conexao.orcUrl, Conexao.user, Conexao.pass);
-    Statement stm = con.createStatement();
-    ResultSet rs = stm.executeQuery(st);
          
-    return 0;
+        //variavel de conexão à bd
+            con = DriverManager.getConnection(Conexao.orcUrl, Conexao.user, Conexao.pass);
+            Statement stm = con.createStatement();
+            
+            //Conexao propriamente dita
+            try{
+                ResultSet rs = stm.executeQuery(st);
+                return true;
+            }catch(Exception exp){
+                throw new Exception (exp.getMessage());
+            }finally{
+                if(this.rs!=null) this.rs.close();
+                if(this.stmt!=null) this.stmt.close();
+                if(this.con!=null) this.con.close();
+            }
      }
    
     /*
