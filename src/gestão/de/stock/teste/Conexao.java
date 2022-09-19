@@ -37,7 +37,7 @@ public class Conexao {
     }
 
     public Conexao() {
-        
+        int cenas = 0;
     }
     
     /*
