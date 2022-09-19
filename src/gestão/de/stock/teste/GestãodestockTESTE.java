@@ -138,12 +138,16 @@ public class GestãodestockTESTE extends javax.swing.JFrame {
 
     private void stockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stockMouseClicked
         // TODO add your handling code here:
+        
+         //definir as cores dos botões
         stock.setForeground(onClick);
         home.setForeground(onDef);
         
+        //remover o painel antigo 
         jDesktopPane1.removeAll();
        
         Stock stk = new Stock();
+        //Adicionar o painel novo 
         jDesktopPane1.add(stk).setVisible(true);
         
         
