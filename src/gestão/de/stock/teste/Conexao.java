@@ -35,7 +35,8 @@ public class Conexao {
      static String getPass() {
         return pass;
     }
-
+     
+     //Construtor
     public Conexao() {
         int cenas = 0;
     }
