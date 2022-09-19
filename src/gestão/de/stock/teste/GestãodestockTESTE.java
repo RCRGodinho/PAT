@@ -147,6 +147,7 @@ public class GestãodestockTESTE extends javax.swing.JFrame {
         jDesktopPane1.removeAll();
        
         Stock stk = new Stock();
+        
         //Adicionar o painel novo 
         jDesktopPane1.add(stk).setVisible(true);
         
@@ -167,6 +168,7 @@ public class GestãodestockTESTE extends javax.swing.JFrame {
         Main hm = new Main();
         //Adicionar a nova página
         jDesktopPane1.add(hm).setVisible(true);
+        
     }//GEN-LAST:event_homeMouseClicked
 
     /**
