@@ -24,22 +24,6 @@ public class Conexao {
     Connection con = null;
     Statement stmt = null;
     ResultSet rs = null;
-
-     static String getOrcUrl() {
-        return orcUrl;
-    }
-
-     static String getDriver() {
-        return driver;
-    }
-
-     static String getUser() {
-        return user;
-    }
-
-     static String getPass() {
-        return pass;
-    }
      
      boolean fazConexao(String st) throws SQLException, Exception
      { 
@@ -48,11 +32,11 @@ public class Conexao {
             con = DriverManager.getConnection(Conexao.orcUrl, Conexao.user, Conexao.pass);
             Statement stm = con.createStatement();
             
-            //Conexao propriamente dita
+            //Conexao
             try{
                 ResultSet rs = stm.executeQuery(st);
                 return true;
-            }catch(Exception exp){
+            }catch(SQLException exp){
                 throw new Exception (exp.getMessage());
             }finally{
                 if(this.rs!=null) this.rs.close();
