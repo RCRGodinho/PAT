@@ -21,20 +21,29 @@ public class Conexao {
     static final String driver = "oracle.jdbc.OracleDriver";
     static final String user = "dbadmin";
     static final String pass = "admin";
-    Connection con = null;
-    Statement stmt = null;
-    ResultSet rs = null;
+    Connection con;
+    Statement stmt;
+    ResultSet rs;
+    
+    Conexao()
+    {
+        this.con = null;
+        this.stmt = null;
+        this.rs = null;
+    }
      
-     boolean fazConexao(String st) throws SQLException, Exception
+     boolean setQuery(String st) throws SQLException, Exception
      { 
          
         //variavel de conexão à bd
             con = DriverManager.getConnection(Conexao.orcUrl, Conexao.user, Conexao.pass);
             Statement stm = con.createStatement();
             
+            
+            Class.forName(Conexao.driver);
             //Conexao
             try{
-                ResultSet rs = stm.executeQuery(st);
+                rs = stm.executeQuery(st);
                 return true;
             }catch(SQLException exp){
                 throw new Exception (exp.getMessage());

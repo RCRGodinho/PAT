@@ -165,6 +165,7 @@ public class GestãodestockTESTE extends javax.swing.JFrame {
         
         //Remover a pagina antiga
         jDesktopPane1.removeAll();
+        //Criar objeto para nova class
         Main hm = new Main();
         //Adicionar a nova página
         jDesktopPane1.add(hm).setVisible(true);
@@ -201,9 +202,6 @@ public class GestãodestockTESTE extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         
-        
-
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
