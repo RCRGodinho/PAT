@@ -45,7 +45,6 @@ public class Conexao {
             con = DriverManager.getConnection(Conexao.orcUrl, Conexao.user, Conexao.pass);
             Statement stm = con.createStatement();
             
-            
             Class.forName(Conexao.driver);
             
         //Conexao
