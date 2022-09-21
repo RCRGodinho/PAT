@@ -17,9 +17,7 @@ public class GestãodestockTESTE extends javax.swing.JFrame {
     Color onDef;
     Color onClick;
 
-    /**
-     * Creates new form Inserir
-     */
+    
     public GestãodestockTESTE() {
         initComponents();
         
