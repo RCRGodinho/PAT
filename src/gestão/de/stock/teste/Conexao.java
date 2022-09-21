@@ -31,6 +31,12 @@ public class Conexao {
         this.stmt = null;
         this.rs = null;
     }
+
+    public static String getUser() {
+        return user;
+    }
+    
+    
      
      boolean setQuery(String st) throws SQLException, Exception
      { 
