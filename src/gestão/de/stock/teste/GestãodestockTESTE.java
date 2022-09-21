@@ -174,6 +174,7 @@ public class GestãodestockTESTE extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.ClassNotFoundException
      */
     public static void main(String args[]) throws ClassNotFoundException, Exception {
         /* Set the Nimbus look and feel */
@@ -203,10 +204,8 @@ public class GestãodestockTESTE extends javax.swing.JFrame {
         //</editor-fold>
         
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GestãodestockTESTE().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new GestãodestockTESTE().setVisible(true);
         });
     }
 
