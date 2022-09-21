@@ -38,7 +38,7 @@ public class Conexao {
     
     
      
-     boolean setQuery(String st) throws SQLException, Exception
+     void setQuery(String st) throws SQLException, Exception
      { 
          
         //variavel de conexão à bd
@@ -47,10 +47,10 @@ public class Conexao {
             
             
             Class.forName(Conexao.driver);
-            //Conexao
+            
+        //Conexao
             try{
                 rs = stm.executeQuery(st);
-                return true;
             }catch(SQLException exp){
                 throw new Exception (exp.getMessage());
             }finally{
