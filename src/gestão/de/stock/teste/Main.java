@@ -17,11 +17,11 @@ public class Main extends javax.swing.JInternalFrame {
      */
     public Main() {
         initComponents();
-        
         //tornar o painel fixo 
-        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        BasicInternalFrameUI bi =(BasicInternalFrameUI)this.getUI();  
-        bi.setNorthPane(null);
+        setPainelFixo();
+        /***********************************************/
+        
+        
     }
 
     /**
@@ -61,6 +61,13 @@ public class Main extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //tornar o painel fixo 
+    private void setPainelFixo()
+    {
+        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        BasicInternalFrameUI bi =(BasicInternalFrameUI)this.getUI();  
+        bi.setNorthPane(null);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
