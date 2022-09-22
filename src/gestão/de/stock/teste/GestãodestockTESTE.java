@@ -201,6 +201,13 @@ public class GestãodestockTESTE extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         
+        Conexao c = new Conexao();
+        
+        ResultSet rs = c.fazerQuery("SELECT * FROM Consumivel");
+        
+       
+
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new GestãodestockTESTE().setVisible(true);

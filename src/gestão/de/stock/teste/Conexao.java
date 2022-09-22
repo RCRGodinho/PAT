@@ -38,7 +38,7 @@ public class Conexao {
     
     
      
-     void fazerQuery(String st) throws SQLException, Exception
+     ResultSet fazerQuery(String st) throws SQLException, Exception
      { 
          
         //variavel de conexão à bd
@@ -50,8 +50,11 @@ public class Conexao {
         //Conexao
             try{
                 rs = stm.executeQuery(st);
+              
+                return rs;
+
             }catch(SQLException exp){
-                throw new Exception (exp.getMessage());
+                throw new Exception ("Conexao falhou");
             }finally{
                 if(this.rs!=null) this.rs.close();
                 if(this.stmt!=null) this.stmt.close();
