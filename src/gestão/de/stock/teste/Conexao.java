@@ -38,7 +38,7 @@ public class Conexao {
     
     
      
-     void setQuery(String st) throws SQLException, Exception
+     void fazerQuery(String st) throws SQLException, Exception
      { 
          
         //variavel de conexão à bd
