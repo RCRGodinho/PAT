@@ -28,6 +28,8 @@ public class Stock extends javax.swing.JInternalFrame {
         /************************************************************************/
         
         
+        
+        
     }
     
     /**
