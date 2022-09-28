@@ -36,7 +36,7 @@ public class Conexao {
         return user;
     }
     
-    
+    int n = 2;
      
      ResultSet fazerQuery(String st) throws SQLException, Exception
      { 
