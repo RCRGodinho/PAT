@@ -36,7 +36,6 @@ public class Conexao {
         return user;
     }
     
-    
      
      ResultSet fazerQuery(String st) throws SQLException, Exception
      { 
@@ -61,37 +60,6 @@ public class Conexao {
                 if(this.con!=null) this.con.close();
             }
      }
-   
-    /*
-    // Fazer a conexão à BD
-    //variavel de conexão à bd
-    con = DriverManager.getConnection(Conexao.orcUrl,Conexao.user,Conexao.pass);
-    Statement stm = con.createStatement();
-    ResultSet rs = stm.executeQuery(st);
-     ********************************************************************************
-    Connection con = null;
-    Statement stmt = null;
-    ResultSet rs = null;
-    Class.forName("oracle.jdbc.driver.OracleDriver");
-    try
-    {
-    Class.forName(driver);
-    con = java.sql.DriverManager.getConnection(orcUrl,user,pass);
-    }
-    catch(Exception exp)
-    {
-    throw new Exception (exp.getMessage());
-    }finally
-    {
-    if(rs!=null) rs.close();
-    if(stmt!=null) stmt.close();
-    if(con!=null) con.close();
-    }
-     */
-
-    
-
-    
      
      
     
