@@ -38,24 +38,24 @@ public class Main extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(1020, 720));
 
         jLabel1.setFont(new java.awt.Font("Gabriola", 3, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel1.setForeground(new java.awt.Color(136, 8, 81));
         jLabel1.setText("MAIN");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(712, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(155, 155, 155))
+                .addContainerGap(833, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(270, 270, 270)
+                .addGap(66, 66, 66)
                 .addComponent(jLabel1)
-                .addContainerGap(467, Short.MAX_VALUE))
+                .addContainerGap(540, Short.MAX_VALUE))
         );
 
         pack();

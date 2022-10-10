@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
@@ -21,18 +21,18 @@ import oracle.jdbc.OracleType;
  *
  * @author PAT
  */
-public class Stock extends  javax.swing.JInternalFrame {
+public class Consumivel extends  javax.swing.JInternalFrame {
     
     //Inicializar o contrutor da conexao
     Conexao c = new Conexao();
 
-    public Stock() throws Exception {
+    public Consumivel() throws Exception {
         initComponents();
          //tornar o painel fixo 
             setPainelFixo();
         /**********************************************************************/
         
-        tabelaStock();
+        tabelaConsumivel();
     }
     
     /**
@@ -46,7 +46,10 @@ public class Stock extends  javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
+        btnAdicionar = new javax.swing.JButton();
+        btnApagar = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(32, 32));
         setName(""); // NOI18N
@@ -57,14 +60,14 @@ public class Stock extends  javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "Stock", "Nome", "Cod_Fabricante", "SIG"
+                "ID", "NNA", "Nome", "UMC", "Preço", "Referencia", "Impressora"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -77,12 +80,28 @@ public class Stock extends  javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(table);
 
-        jButton1.setText("Refresh");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRefresh.setText("Refresh");
+        btnRefresh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnRefreshMouseClicked(evt);
             }
         });
+
+        btnAdicionar.setText("Adicionar");
+        btnAdicionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAdicionarMouseClicked(evt);
+            }
+        });
+
+        btnApagar.setText("Apagar");
+        btnApagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApagarActionPerformed(evt);
+            }
+        });
+
+        btnAtualizar.setText("Atualizar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,7 +110,11 @@ public class Stock extends  javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 841, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                    .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnApagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
@@ -99,25 +122,43 @@ public class Stock extends  javax.swing.JInternalFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefreshMouseClicked
         try {
             // TODO add your handling code here:
 
             //chamar metodo tabelaStock e efetuar a query
-                tabelaStock();
+                tabelaConsumivel();
                 
         } catch (Exception ex) {
-            Logger.getLogger(Stock.class.getName()).log(Level.SEVERE, "Falha da query", ex);
+            Logger.getLogger(Consumivel.class.getName()).log(Level.SEVERE, "Falha da query", ex);
         }
         
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btnRefreshMouseClicked
+
+    private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_btnApagarActionPerformed
+
+    private void btnAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarMouseClicked
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_btnAdicionarMouseClicked
 
     //tornar o painel fixo 
     private void setPainelFixo()
@@ -128,7 +169,7 @@ public class Stock extends  javax.swing.JInternalFrame {
     }
     
     
-    public void tabelaStock() throws Exception
+    public void tabelaConsumivel() throws Exception
      {
          try{
              //definir a tabela
@@ -137,12 +178,13 @@ public class Stock extends  javax.swing.JInternalFrame {
          
              //criar uma query e executar
          Statement stm = c.fazerConexao().createStatement();
-         ResultSet rs = stm.executeQuery("SELECT ID_ARMAZEM, STOCK, NOME, CODFABRICANTE, SIG FROM ARMAZEM");
+         ResultSet rs = stm.executeQuery("SELECT ID_CONSUMIVEL, NNA, NOME, UMC, PRECO, REFERENCIA, (MARCA || '_' || MODELO) AS IMPRESSORA FROM CONSUMIVEL a, IMPRESSORA b WHERE a.ID_IMPRESSORA = b.ID_IMPRESSORA");
+             
            while(rs.next())
            {
                //passar os dados da BD para um object
-               Object o[] = {rs.getInt("ID_ARMAZEM"),rs.getInt("STOCK"), rs.getString("NOME"),
-               rs.getString("CODFABRICANTE"), rs.getInt("SIG")};
+               Object o[] = {rs.getInt("ID_CONSUMIVEL"),rs.getString("NNA"), rs.getString("NOME"),
+               rs.getString("UMC"), rs.getDouble("PRECO"), rs.getString("REFERENCIA"), rs.getString("IMPRESSORA")};
                //Adicionar os dados à tabela
                tabela.addRow(o);
        }
@@ -155,7 +197,10 @@ public class Stock extends  javax.swing.JInternalFrame {
      }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnApagar;
+    private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
