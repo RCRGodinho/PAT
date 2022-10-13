@@ -23,8 +23,9 @@ import oracle.jdbc.OracleType;
  */
 public class Consumivel extends  javax.swing.JInternalFrame {
     
-    //Inicializar o contrutor da conexao
+    //Inicializar os contrutores
     Conexao c = new Conexao();
+    PopUp pop = new PopUp();
 
     public Consumivel() throws Exception {
         initComponents();
@@ -91,6 +92,11 @@ public class Consumivel extends  javax.swing.JInternalFrame {
         btnAdicionar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAdicionarMouseClicked(evt);
+            }
+        });
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
             }
         });
 
@@ -160,6 +166,17 @@ public class Consumivel extends  javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnAdicionarMouseClicked
 
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        // TODO add your handling code here:
+        
+        //Mostrar popup
+        try {
+           pop.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Consumivel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
     //tornar o painel fixo 
     private void setPainelFixo()
     {
@@ -195,6 +212,8 @@ public class Consumivel extends  javax.swing.JInternalFrame {
        }
 
      }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
