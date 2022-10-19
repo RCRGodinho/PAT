@@ -18,18 +18,19 @@ import gestão.de.stock.teste.Consumivel;
  *
  * @author PAT
  */
-public class PopUp extends javax.swing.JFrame {
+public class PopUpEditar extends javax.swing.JFrame {
     
     Conexao c = new Conexao();
-    Consumivel cons = new Consumivel();
     boolean estado;
 
     /**
      * Creates new form Pop_up
      */
-    public PopUp() throws ClassNotFoundException, Exception {
+    public PopUpEditar() throws ClassNotFoundException, Exception {
         initComponents();
         comboOracle();
+        
+        buscarCampos();
     }
 
     /**
@@ -247,13 +248,12 @@ public class PopUp extends javax.swing.JFrame {
                 
                 
                     this.dispose();
-                    limparCampos();
              
         } catch (SQLException | ClassNotFoundException ex) {
             
             JOptionPane.showMessageDialog(rootPane, "ERRO!");
         } catch (Exception ex) {
-            Logger.getLogger(PopUp.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PopUpEditar.class.getName()).log(Level.SEVERE, null, ex);
         }
         }else{
             
@@ -265,16 +265,51 @@ public class PopUp extends javax.swing.JFrame {
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         // TODO add your handling code here:
         this.dispose();
-        limparCampos();
     }//GEN-LAST:event_btnCancelarMouseClicked
 
-    void limparCampos()
+    void buscarCampos() throws Exception
     {
+        
+        Statement stm = c.fazerConexao().createStatement();
+        ResultSet rs=null;
+        String marca = "";
+        String modelo = "";
+        
+         //int row = cons.table.getSelectedRow();
+         //String value = cons.table.getModel().getValueAt(row, 0).toString();
+                
+         //rs = stm.executeQuery("SELECT MARCA,MODELO FROM IMPRESSORAS WHERE ID_IMPRESSORA = "+Integer.parseInt(value));
+         
+         while(rs.next())
+             {
+               marca=  rs.getString(1);
+               modelo = rs.getString(2);
+             }
+         
+         System.out.println(marca+modelo);
+                
+         /*
+        
+         String[] result =comboImpressora.getSelectedItem().toString().split("_");
+            String marca = result[0];
+            String modelo = result[1];
+     
+        int id = 0;
+             rs = stm.executeQuery("SELECT ID_Impressora FROM IMPRESSORA WHERE IMPRESSORA.MARCA = '"+marca+"' AND IMPRESSORA.Modelo = '"+modelo+"'");
+             while(rs.next())
+             {
+                id = rs.getInt(1);
+             }
+        stm = c.fazerConexao().createStatement();
+        
+        stm.executeUpdate("UPDATE FROM SET NNA = '"+nna.getText().toUpperCase()+"' ,NOME= '"+nome.getText().toUpperCase()+"' ,UMC= "+Integer.parseInt(umc.getText())+" ,PRECO= "+Float.parseFloat(preco.getText())+" ,REFERENCIA= "+Integer.parseInt(referencia.getText())+" , ID_IMPRESSORA="+id+",WHERE ");
+        
         nna.setText("");
         nome.setText("");
         umc.setText("");
         preco.setText("");
         referencia.setText("");
+         */
     }
 
     
@@ -329,14 +364,16 @@ public class PopUp extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PopUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PopUpEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PopUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PopUpEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PopUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PopUpEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PopUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PopUpEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         
@@ -346,9 +383,9 @@ public class PopUp extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new PopUp().setVisible(true);
+                    new PopUpEditar().setVisible(true);
                 } catch (Exception ex) {
-                    Logger.getLogger(PopUp.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(PopUpEditar.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

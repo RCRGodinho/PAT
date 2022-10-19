@@ -5,17 +5,14 @@
 package gestão.de.stock.teste;
 
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JLabel;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.transform.Source;
-import oracle.jdbc.OracleType;
 
 /**
  *
@@ -26,9 +23,11 @@ public class Consumivel extends  javax.swing.JInternalFrame {
     //Inicializar os contrutores
     Conexao c = new Conexao();
     PopUp pop = new PopUp();
+    
 
     public Consumivel() throws Exception {
         initComponents();
+        table.setSelectionModel(new ForcedListSelectionModel());
          //tornar o painel fixo 
             setPainelFixo();
         /**********************************************************************/
@@ -50,7 +49,7 @@ public class Consumivel extends  javax.swing.JInternalFrame {
         btnRefresh = new javax.swing.JButton();
         btnAdicionar = new javax.swing.JButton();
         btnApagar = new javax.swing.JButton();
-        btnAtualizar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(32, 32));
         setName(""); // NOI18N
@@ -107,7 +106,12 @@ public class Consumivel extends  javax.swing.JInternalFrame {
             }
         });
 
-        btnAtualizar.setText("Atualizar");
+        btnEditar.setText("Editar");
+        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,7 +124,7 @@ public class Consumivel extends  javax.swing.JInternalFrame {
                     .addComponent(btnRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                     .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnApagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
@@ -134,7 +138,7 @@ public class Consumivel extends  javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -157,7 +161,34 @@ public class Consumivel extends  javax.swing.JInternalFrame {
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
         // TODO add your handling code here:
         
-        
+        //verificar se o user selecionou algum dado
+        if(table.getSelectedRow() == -1)
+         {
+           //   JOptionPane.showMessageDialog(rootPane, "Selecione um dado para apagar!");
+         }else{
+            //buscar o valor do ID no dado selecionado 
+            
+            String value = getIdSelecionado();
+                
+             Statement stm;
+             try {
+                 stm = c.fazerConexao().createStatement();
+                int op = JOptionPane.showConfirmDialog(rootPane, "Tem a certeza?");
+                 if(op == 0)
+                 {
+                     ResultSet rs = stm.executeQuery("DELETE FROM Consumivel WHERE ID_CONSUMIVEL = "+Integer.parseInt(value));
+                     JOptionPane.showMessageDialog(rootPane, "Dado apagado com sucesso!");
+                     tabelaConsumivel();
+                 }
+                 
+             } catch (SQLException | ClassNotFoundException ex) {
+                 JOptionPane.showMessageDialog(rootPane, "ERRO!");
+             } catch (Exception ex) {
+                Logger.getLogger(Consumivel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             
+         }
+
     }//GEN-LAST:event_btnApagarActionPerformed
 
     private void btnAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarMouseClicked
@@ -177,6 +208,15 @@ public class Consumivel extends  javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
+    private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
+        // TODO add your handling code here:
+         try {
+           pop.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Consumivel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnEditarMouseClicked
+
     //tornar o painel fixo 
     private void setPainelFixo()
     {
@@ -185,6 +225,13 @@ public class Consumivel extends  javax.swing.JInternalFrame {
         bi.setNorthPane(null);
     }
     
+    public String getIdSelecionado()
+    {
+         int row = table.getSelectedRow();
+                String value = table.getModel().getValueAt(row, 0).toString();
+                
+                return value;
+    }
     
     public void tabelaConsumivel() throws Exception
      {
@@ -218,9 +265,9 @@ public class Consumivel extends  javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnApagar;
-    private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable table;
+    public javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
