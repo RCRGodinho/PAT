@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import gestão.de.stock.teste.Consumivel;
 
 
 /**
@@ -21,7 +20,7 @@ import gestão.de.stock.teste.Consumivel;
 public class PopUp extends javax.swing.JFrame {
     
     Conexao c = new Conexao();
-    Consumivel cons = new Consumivel();
+    Consumivel cons;
     boolean estado;
 
     /**
