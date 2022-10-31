@@ -4,17 +4,29 @@
  */
 package gestão.de.stock.pkgfinal;
 
+import java.awt.Color;
+
 /**
  *
  * @author PAT
  */
 public class GestãoDeStockFINAL extends javax.swing.JFrame {
 
+     Color preto;
+     Color branco;
+     boolean clickCon;
+     boolean clickImp;
+     boolean clickArm;
+     boolean clickCen;
+    
     /**
      * Creates new form Main
      */
     public GestãoDeStockFINAL() {
         initComponents();
+        
+       preto = new Color(0,0,0);
+       branco = new Color(232, 236, 244);
     }
 
     /**
@@ -26,27 +38,350 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        mainPanel = new javax.swing.JPanel();
+        menuPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        painelConsumivel = new javax.swing.JPanel();
+        btnConsumivel = new javax.swing.JLabel();
+        painelImpressora = new javax.swing.JPanel();
+        btnImpressora = new javax.swing.JLabel();
+        painelArmazem = new javax.swing.JPanel();
+        btnArmazem = new javax.swing.JLabel();
+        painelCentroCusto = new javax.swing.JPanel();
+        btnCentroCusto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Background.png"))); // NOI18N
+        mainPanel.setBackground(new java.awt.Color(232, 236, 244));
+        mainPanel.setPreferredSize(new java.awt.Dimension(1070, 650));
+
+        menuPanel.setBackground(new java.awt.Color(0, 0, 0));
+        menuPanel.setPreferredSize(new java.awt.Dimension(1070, 40));
+
+        jLabel1.setFont(new java.awt.Font("Webdings", 0, 11)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/pikaaaa-svg.png"))); // NOI18N
         jLabel1.setText("jLabel1");
+        jLabel1.setMaximumSize(new java.awt.Dimension(220, 40));
+        jLabel1.setMinimumSize(new java.awt.Dimension(220, 327));
+        jLabel1.setPreferredSize(new java.awt.Dimension(220, 40));
+
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("CONSUMÍVEIS");
+        jLabel2.setPreferredSize(new java.awt.Dimension(100, 40));
+
+        painelConsumivel.setBackground(new java.awt.Color(0, 0, 0));
+        painelConsumivel.setPreferredSize(new java.awt.Dimension(120, 40));
+        painelConsumivel.setLayout(new java.awt.BorderLayout());
+
+        btnConsumivel.setBackground(new java.awt.Color(0, 0, 0));
+        btnConsumivel.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        btnConsumivel.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsumivel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnConsumivel.setText("CONSUMíVEIS");
+        btnConsumivel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnConsumivel.setPreferredSize(new java.awt.Dimension(100, 20));
+        btnConsumivel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnConsumivelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnConsumivelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnConsumivelMouseExited(evt);
+            }
+        });
+        painelConsumivel.add(btnConsumivel, java.awt.BorderLayout.CENTER);
+
+        painelImpressora.setBackground(new java.awt.Color(0, 0, 0));
+        painelImpressora.setPreferredSize(new java.awt.Dimension(120, 40));
+        painelImpressora.setLayout(new java.awt.BorderLayout());
+
+        btnImpressora.setBackground(new java.awt.Color(0, 0, 0));
+        btnImpressora.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        btnImpressora.setForeground(new java.awt.Color(255, 255, 255));
+        btnImpressora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnImpressora.setText("IMPRESSORAS");
+        btnImpressora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnImpressora.setPreferredSize(new java.awt.Dimension(100, 20));
+        btnImpressora.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnImpressoraMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnImpressoraMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnImpressoraMouseExited(evt);
+            }
+        });
+        painelImpressora.add(btnImpressora, java.awt.BorderLayout.CENTER);
+
+        painelArmazem.setBackground(new java.awt.Color(0, 0, 0));
+        painelArmazem.setPreferredSize(new java.awt.Dimension(120, 40));
+        painelArmazem.setLayout(new java.awt.BorderLayout());
+
+        btnArmazem.setBackground(new java.awt.Color(0, 0, 0));
+        btnArmazem.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        btnArmazem.setForeground(new java.awt.Color(255, 255, 255));
+        btnArmazem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnArmazem.setText("ARMAZÉNS");
+        btnArmazem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnArmazem.setPreferredSize(new java.awt.Dimension(100, 20));
+        btnArmazem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnArmazemMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnArmazemMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnArmazemMouseExited(evt);
+            }
+        });
+        painelArmazem.add(btnArmazem, java.awt.BorderLayout.CENTER);
+
+        painelCentroCusto.setBackground(new java.awt.Color(0, 0, 0));
+        painelCentroCusto.setPreferredSize(new java.awt.Dimension(160, 40));
+        painelCentroCusto.setLayout(new java.awt.BorderLayout());
+
+        btnCentroCusto.setBackground(new java.awt.Color(0, 0, 0));
+        btnCentroCusto.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        btnCentroCusto.setForeground(new java.awt.Color(255, 255, 255));
+        btnCentroCusto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCentroCusto.setText("CENTRO DE CUSTO");
+        btnCentroCusto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCentroCusto.setPreferredSize(new java.awt.Dimension(100, 20));
+        btnCentroCusto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCentroCustoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCentroCustoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCentroCustoMouseExited(evt);
+            }
+        });
+        painelCentroCusto.add(btnCentroCusto, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
+        menuPanel.setLayout(menuPanelLayout);
+        menuPanelLayout.setHorizontalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                        .addComponent(painelConsumivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0)
+                .addComponent(painelImpressora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(painelArmazem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(painelCentroCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
+        );
+        menuPanelLayout.setVerticalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(painelImpressora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(painelConsumivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(painelArmazem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(painelCentroCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 610, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1275, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnConsumivelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsumivelMouseClicked
+        // TODO add your handling code here:
+        
+        //Definir cores 
+        clickCon = true;
+        clickImp = false;
+        clickCen = false;
+        clickArm = false;
+        
+        painelConsumivel.setBackground(branco);
+            btnConsumivel.setForeground(preto);
+            
+            painelImpressora.setBackground(preto);
+            painelCentroCusto.setBackground(preto);
+            painelArmazem.setBackground(preto);
+            
+            btnImpressora.setForeground(branco);
+            btnArmazem.setForeground(branco);
+            btnCentroCusto.setForeground(branco);
+        
+    }//GEN-LAST:event_btnConsumivelMouseClicked
+ 
+    private void btnImpressoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImpressoraMouseClicked
+        // TODO add your handling code here:
+        //Definir cores 
+        
+        clickImp = true;
+        clickCon = false;
+        clickCen = false;
+        clickArm = false;
+        
+         painelImpressora.setBackground(branco);
+            btnImpressora.setForeground(preto);
+            
+            painelConsumivel.setBackground(preto);
+            painelCentroCusto.setBackground(preto);
+            painelArmazem.setBackground(preto);
+            
+            btnConsumivel.setForeground(branco);
+            btnArmazem.setForeground(branco);
+            btnCentroCusto.setForeground(branco);
+    }//GEN-LAST:event_btnImpressoraMouseClicked
+
+    private void btnConsumivelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsumivelMouseEntered
+        // TODO add your handling code here:
+        
+         painelConsumivel.setBackground(branco);
+            btnConsumivel.setForeground(preto);
+    }//GEN-LAST:event_btnConsumivelMouseEntered
+
+    private void btnImpressoraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImpressoraMouseEntered
+        // TODO add your handling code here:
+        
+        painelImpressora.setBackground(branco);
+            btnImpressora.setForeground(preto);
+    }//GEN-LAST:event_btnImpressoraMouseEntered
+
+    private void btnConsumivelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsumivelMouseExited
+        // TODO add your handling code here:
+        if(!clickCon)
+        {
+            painelConsumivel.setBackground(preto);
+            btnConsumivel.setForeground(branco);
+        }
+         
+    }//GEN-LAST:event_btnConsumivelMouseExited
+
+    private void btnImpressoraMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImpressoraMouseExited
+        // TODO add your handling code here:
+        if(!clickImp)
+        {
+            painelImpressora.setBackground(preto);
+            btnImpressora.setForeground(branco);
+        }
+         
+    }//GEN-LAST:event_btnImpressoraMouseExited
+
+    private void btnArmazemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArmazemMouseClicked
+        // TODO add your handling code here:
+        clickCen = false;
+        clickArm = true;
+        clickImp = false;
+        clickCon = false;
+        
+        painelArmazem.setBackground(branco);
+            btnArmazem.setForeground(preto);
+            
+            painelImpressora.setBackground(preto);
+            painelCentroCusto.setBackground(preto);
+            painelConsumivel.setBackground(preto);
+            
+            btnImpressora.setForeground(branco);
+            btnConsumivel.setForeground(branco);
+            btnCentroCusto.setForeground(branco);
+    }//GEN-LAST:event_btnArmazemMouseClicked
+
+    private void btnArmazemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArmazemMouseEntered
+        // TODO add your handling code here:
+        
+        painelArmazem.setBackground(branco);
+            btnArmazem.setForeground(preto);
+    }//GEN-LAST:event_btnArmazemMouseEntered
+
+    private void btnArmazemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArmazemMouseExited
+        // TODO add your handling code here:
+        if(!clickArm)
+        {
+            painelArmazem.setBackground(preto);
+            btnArmazem.setForeground(branco);
+        }
+        
+    }//GEN-LAST:event_btnArmazemMouseExited
+
+    private void btnCentroCustoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCentroCustoMouseClicked
+        // TODO add your handling code here:
+        clickCen = true;
+        clickArm = false;
+        clickImp = false;
+        clickCon = false;
+        
+         painelCentroCusto.setBackground(branco);
+            btnCentroCusto.setForeground(preto);
+            
+            painelConsumivel.setBackground(preto);
+            painelImpressora.setBackground(preto);
+            painelArmazem.setBackground(preto);
+            
+            btnConsumivel.setForeground(branco);
+            btnArmazem.setForeground(branco);
+            btnImpressora.setForeground(branco);
+    }//GEN-LAST:event_btnCentroCustoMouseClicked
+
+    private void btnCentroCustoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCentroCustoMouseEntered
+        // TODO add your handling code here:
+        painelCentroCusto.setBackground(branco);
+            btnCentroCusto.setForeground(preto);
+    }//GEN-LAST:event_btnCentroCustoMouseEntered
+
+    private void btnCentroCustoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCentroCustoMouseExited
+        // TODO add your handling code here:
+        if(!clickCen)
+        {
+             painelCentroCusto.setBackground(preto);
+            btnCentroCusto.setForeground(branco);
+        }
+    }//GEN-LAST:event_btnCentroCustoMouseExited
+
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -84,6 +419,17 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnArmazem;
+    private javax.swing.JLabel btnCentroCusto;
+    private javax.swing.JLabel btnConsumivel;
+    private javax.swing.JLabel btnImpressora;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel mainPanel;
+    private javax.swing.JPanel menuPanel;
+    private javax.swing.JPanel painelArmazem;
+    private javax.swing.JPanel painelCentroCusto;
+    private javax.swing.JPanel painelConsumivel;
+    private javax.swing.JPanel painelImpressora;
     // End of variables declaration//GEN-END:variables
 }
