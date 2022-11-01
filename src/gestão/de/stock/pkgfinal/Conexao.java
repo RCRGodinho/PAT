@@ -19,9 +19,9 @@ public class Conexao {
      String driver = "oracle.jdbc.OracleDriver";
      String user = "dbadmin";
      String pass = "admin";
-     Connection conn;
      
      public Conexao() {
+         
     }
     
     
@@ -35,12 +35,12 @@ public class Conexao {
      */
     public Connection fazerConexao() throws SQLException, ClassNotFoundException
     {
+        Connection conn;
+        
         try{
-            Class.forName(this.driver);
             conn = DriverManager.getConnection(this.orcUrl, this.user, this.pass);
             return conn; 
-        }catch(ClassNotFoundException | SQLException x)
-        {
+        }catch( SQLException x){
             System.out.println(x);
             return null;
         }

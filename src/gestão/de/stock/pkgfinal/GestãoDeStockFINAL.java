@@ -5,6 +5,8 @@
 package gestão.de.stock.pkgfinal;
 
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -63,8 +65,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
         menuPanel.setPreferredSize(new java.awt.Dimension(1070, 40));
 
         logoMainn.setFont(new java.awt.Font("Webdings", 0, 11)); // NOI18N
-        logoMainn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/pikaaaa-svg.png"))); // NOI18N
-        logoMainn.setText("jLabel1");
+        logoMainn.setIcon(new javax.swing.ImageIcon("C:\\Users\\PAT\\Desktop\\Untitled-1-22_x40.png")); // NOI18N
         logoMainn.setMaximumSize(new java.awt.Dimension(220, 40));
         logoMainn.setMinimumSize(new java.awt.Dimension(220, 327));
         logoMainn.setPreferredSize(new java.awt.Dimension(220, 40));
@@ -258,24 +259,37 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsumivelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsumivelMouseClicked
-        // TODO add your handling code here:
-        
-        //Definir cores 
-        clickCon = true;
-        clickImp = false;
-        clickCen = false;
-        clickArm = false;
-        
-        painelConsumivel.setBackground(branco);
-            btnConsumivel.setForeground(preto);
-            
-            painelImpressora.setBackground(preto);
-            painelCentroCusto.setBackground(preto);
-            painelArmazem.setBackground(preto);
-            
-            btnImpressora.setForeground(branco);
-            btnArmazem.setForeground(branco);
-            btnCentroCusto.setForeground(branco);
+         try {
+             // TODO add your handling code here:
+             
+             //Definir cores
+             clickCon = true;
+             clickImp = false;
+             clickCen = false;
+             clickArm = false;
+             
+             painelConsumivel.setBackground(branco);
+             btnConsumivel.setForeground(preto);
+             
+             painelImpressora.setBackground(preto);
+             painelCentroCusto.setBackground(preto);
+             painelArmazem.setBackground(preto);
+             
+             btnImpressora.setForeground(branco);
+             btnArmazem.setForeground(branco);
+             btnCentroCusto.setForeground(branco);
+             
+             
+             //Remover a pagina antiga
+             paginas.removeAll();
+             //Criar objeto para nova class
+             Consumivel hm = new Consumivel();
+             //Adicionar a nova página
+             paginas.add(hm).setVisible(true);
+             
+         } catch (Exception ex) {
+             Logger.getLogger(GestãoDeStockFINAL.class.getName()).log(Level.SEVERE, null, ex);
+         }
         
     }//GEN-LAST:event_btnConsumivelMouseClicked
  
