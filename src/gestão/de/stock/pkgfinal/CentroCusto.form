@@ -83,29 +83,17 @@
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="4">
+              <Table columnCount="5" rowCount="4">
                 <Column editable="false" title="ID" type="java.lang.Integer"/>
-                <Column editable="false" title="NNA" type="java.lang.String"/>
-                <Column editable="false" title="NOME" type="java.lang.String"/>
-                <Column editable="false" title="UMC" type="java.lang.Integer"/>
-                <Column editable="false" title="PRECO" type="java.lang.Float"/>
-                <Column editable="false" title="REFERENCIA" type="java.lang.Integer"/>
-                <Column editable="false" title="IMPRESSORA" type="java.lang.String"/>
+                <Column editable="false" title="RESPONSAVEL" type="java.lang.String"/>
+                <Column editable="false" title="TEXTO" type="java.lang.String"/>
+                <Column editable="false" title="CUSTO" type="java.lang.Integer"/>
+                <Column editable="false" title="LOCALIZACAO" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="10" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -161,41 +149,29 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jSeparator5" max="32767" attributes="0"/>
-                      <Component id="jSeparator4" max="32767" attributes="0"/>
                       <Component id="jSeparator3" max="32767" attributes="0"/>
                       <Component id="jSeparator2" max="32767" attributes="0"/>
                       <Component id="jSeparator1" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel1" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="nna" max="32767" attributes="0"/>
+                          <Component id="responsavel" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel4" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="preco" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel6" min="-2" pref="80" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="comboImpressora" max="32767" attributes="0"/>
+                          <Component id="local" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel3" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="umc" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabel5" min="-2" pref="80" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="referencia" max="32767" attributes="0"/>
+                          <Component id="custo" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="jLabel2" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="nome" min="-2" pref="142" max="-2" attributes="0"/>
+                          <Component id="texto" min="-2" pref="142" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -207,14 +183,14 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nna" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="responsavel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nome" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="texto" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -222,28 +198,14 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="umc" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="custo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      <Component id="preco" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator4" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <Component id="referencia" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator5" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="comboImpressora" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="local" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -254,79 +216,45 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="nna"/>
+              <ComponentRef name="responsavel"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="NNA"/>
+            <Property name="text" type="java.lang.String" value="RESPONSAVEL"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="nna">
+        <Component class="javax.swing.JTextField" name="responsavel">
           <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nnaKeyTyped"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="responsavelKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="NOME"/>
+            <Property name="text" type="java.lang.String" value="TEXTO"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="nome">
+        <Component class="javax.swing.JTextField" name="texto">
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="UMC"/>
+            <Property name="text" type="java.lang.String" value="CUSTO"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="umc">
+        <Component class="javax.swing.JTextField" name="custo">
           <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="umcKeyTyped"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="custoKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator3">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="PRE&#xc7;O"/>
+            <Property name="text" type="java.lang.String" value="LOCALIZACAO"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="preco">
-        </Component>
-        <Component class="javax.swing.JSeparator" name="jSeparator4">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="REFERENCIA"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="referencia">
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="referenciaKeyTyped"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JSeparator" name="jSeparator5">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="IMPRESSORA"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="comboImpressora">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
+        <Component class="javax.swing.JTextField" name="local">
         </Component>
       </SubComponents>
     </Container>

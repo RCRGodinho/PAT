@@ -36,10 +36,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="butoes" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="dados" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="dados" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -83,14 +80,12 @@
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="4">
+              <Table columnCount="5" rowCount="4">
                 <Column editable="false" title="ID" type="java.lang.Integer"/>
-                <Column editable="false" title="NNA" type="java.lang.String"/>
+                <Column editable="false" title="STOCK" type="java.lang.Integer"/>
                 <Column editable="false" title="NOME" type="java.lang.String"/>
-                <Column editable="false" title="UMC" type="java.lang.Integer"/>
-                <Column editable="false" title="PRECO" type="java.lang.Float"/>
-                <Column editable="false" title="REFERENCIA" type="java.lang.Integer"/>
-                <Column editable="false" title="IMPRESSORA" type="java.lang.String"/>
+                <Column editable="false" title="CODIGO FABRICANTE" type="java.lang.Integer"/>
+                <Column editable="false" title="SIG" type="java.lang.Integer"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -115,17 +110,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -143,7 +128,7 @@
             </Property>
             <Property name="showGrid" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
           <Events>
@@ -161,41 +146,28 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jSeparator5" max="32767" attributes="0"/>
-                      <Component id="jSeparator4" max="32767" attributes="0"/>
                       <Component id="jSeparator3" max="32767" attributes="0"/>
                       <Component id="jSeparator2" max="32767" attributes="0"/>
                       <Component id="jSeparator1" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel1" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="nna" max="32767" attributes="0"/>
+                          <Component id="stock" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel4" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="preco" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel6" min="-2" pref="80" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="comboImpressora" max="32767" attributes="0"/>
+                          <Component id="sig" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel3" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="umc" max="32767" attributes="0"/>
+                          <Component id="codFab" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabel5" min="-2" pref="80" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="referencia" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="jLabel2" min="-2" pref="80" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="nome" min="-2" pref="142" max="-2" attributes="0"/>
+                          <Component id="comboNome" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -207,43 +179,29 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nna" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="stock" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nome" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboNome" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="umc" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="codFab" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      <Component id="preco" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator4" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <Component id="referencia" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator5" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="comboImpressora" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sig" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -254,14 +212,14 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="nna"/>
+              <ComponentRef name="stock"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="NNA"/>
+            <Property name="text" type="java.lang.String" value="STOCK"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="nna">
+        <Component class="javax.swing.JTextField" name="stock">
           <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nnaKeyTyped"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="stockKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
@@ -271,49 +229,28 @@
             <Property name="text" type="java.lang.String" value="NOME"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="nome">
-        </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="UMC"/>
+            <Property name="text" type="java.lang.String" value="CODIGO FAB."/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="umc">
+        <Component class="javax.swing.JTextField" name="codFab">
           <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="umcKeyTyped"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="codFabKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator3">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="PRE&#xc7;O"/>
+            <Property name="text" type="java.lang.String" value="SIG"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="preco">
+        <Component class="javax.swing.JTextField" name="sig">
         </Component>
-        <Component class="javax.swing.JSeparator" name="jSeparator4">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="REFERENCIA"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="referencia">
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="referenciaKeyTyped"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JSeparator" name="jSeparator5">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="IMPRESSORA"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="comboImpressora">
+        <Component class="javax.swing.JComboBox" name="comboNome">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -322,6 +259,9 @@
                 <StringItem index="2" value="Item 3"/>
                 <StringItem index="3" value="Item 4"/>
               </StringArray>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[5, 19]"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -339,7 +279,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="btnAdicionar" min="-2" pref="130" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnEditar" max="32767" attributes="0"/>
+                  <Component id="btnEditar" pref="123" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

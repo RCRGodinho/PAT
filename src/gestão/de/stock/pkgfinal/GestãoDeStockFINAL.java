@@ -65,7 +65,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
         menuPanel.setPreferredSize(new java.awt.Dimension(1070, 40));
 
         logoMainn.setFont(new java.awt.Font("Webdings", 0, 11)); // NOI18N
-        logoMainn.setIcon(new javax.swing.ImageIcon("C:\\Users\\PAT\\Desktop\\Untitled-1-22_x40.png")); // NOI18N
+        logoMainn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logo (1).png"))); // NOI18N
         logoMainn.setMaximumSize(new java.awt.Dimension(220, 40));
         logoMainn.setMinimumSize(new java.awt.Dimension(220, 327));
         logoMainn.setPreferredSize(new java.awt.Dimension(220, 40));
@@ -294,24 +294,35 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsumivelMouseClicked
  
     private void btnImpressoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImpressoraMouseClicked
-        // TODO add your handling code here:
-        //Definir cores 
-        
-        clickImp = true;
-        clickCon = false;
-        clickCen = false;
-        clickArm = false;
-        
-         painelImpressora.setBackground(branco);
-            btnImpressora.setForeground(preto);
-            
-            painelConsumivel.setBackground(preto);
-            painelCentroCusto.setBackground(preto);
-            painelArmazem.setBackground(preto);
-            
-            btnConsumivel.setForeground(branco);
-            btnArmazem.setForeground(branco);
-            btnCentroCusto.setForeground(branco);
+         try {
+             // TODO add your handling code here:
+             //Definir cores
+             
+             clickImp = true;
+             clickCon = false;
+             clickCen = false;
+             clickArm = false;
+             
+             painelImpressora.setBackground(branco);
+             btnImpressora.setForeground(preto);
+             
+             painelConsumivel.setBackground(preto);
+             painelCentroCusto.setBackground(preto);
+             painelArmazem.setBackground(preto);
+             
+             btnConsumivel.setForeground(branco);
+             btnArmazem.setForeground(branco);
+             btnCentroCusto.setForeground(branco);
+             
+             //Remover a pagina antiga
+             paginas.removeAll();
+             //Criar objeto para nova class
+             Impressora hm = new Impressora();
+             //Adicionar a nova página
+             paginas.add(hm).setVisible(true);
+         } catch (Exception ex) {
+             Logger.getLogger(GestãoDeStockFINAL.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }//GEN-LAST:event_btnImpressoraMouseClicked
 
     private void btnConsumivelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsumivelMouseEntered
@@ -349,22 +360,33 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
     }//GEN-LAST:event_btnImpressoraMouseExited
 
     private void btnArmazemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArmazemMouseClicked
-        // TODO add your handling code here:
-        clickCen = false;
-        clickArm = true;
-        clickImp = false;
-        clickCon = false;
-        
-        painelArmazem.setBackground(branco);
-            btnArmazem.setForeground(preto);
-            
-            painelImpressora.setBackground(preto);
-            painelCentroCusto.setBackground(preto);
-            painelConsumivel.setBackground(preto);
-            
-            btnImpressora.setForeground(branco);
-            btnConsumivel.setForeground(branco);
-            btnCentroCusto.setForeground(branco);
+         try {
+             // TODO add your handling code here:
+             clickCen = false;
+             clickArm = true;
+             clickImp = false;
+             clickCon = false;
+             
+             painelArmazem.setBackground(branco);
+             btnArmazem.setForeground(preto);
+             
+             painelImpressora.setBackground(preto);
+             painelCentroCusto.setBackground(preto);
+             painelConsumivel.setBackground(preto);
+             
+             btnImpressora.setForeground(branco);
+             btnConsumivel.setForeground(branco);
+             btnCentroCusto.setForeground(branco);
+             
+             //Remover a pagina antiga
+             paginas.removeAll();
+             //Criar objeto para nova class
+             Armazem hm = new Armazem();
+             //Adicionar a nova página
+             paginas.add(hm).setVisible(true);
+         } catch (Exception ex) {
+             Logger.getLogger(GestãoDeStockFINAL.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }//GEN-LAST:event_btnArmazemMouseClicked
 
     private void btnArmazemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArmazemMouseEntered
@@ -385,22 +407,33 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
     }//GEN-LAST:event_btnArmazemMouseExited
 
     private void btnCentroCustoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCentroCustoMouseClicked
-        // TODO add your handling code here:
-        clickCen = true;
-        clickArm = false;
-        clickImp = false;
-        clickCon = false;
-        
-         painelCentroCusto.setBackground(branco);
-            btnCentroCusto.setForeground(preto);
-            
-            painelConsumivel.setBackground(preto);
-            painelImpressora.setBackground(preto);
-            painelArmazem.setBackground(preto);
-            
-            btnConsumivel.setForeground(branco);
-            btnArmazem.setForeground(branco);
-            btnImpressora.setForeground(branco);
+         try {
+             // TODO add your handling code here:
+             clickCen = true;
+             clickArm = false;
+             clickImp = false;
+             clickCon = false;
+             
+             painelCentroCusto.setBackground(branco);
+             btnCentroCusto.setForeground(preto);
+             
+             painelConsumivel.setBackground(preto);
+             painelImpressora.setBackground(preto);
+             painelArmazem.setBackground(preto);
+             
+             btnConsumivel.setForeground(branco);
+             btnArmazem.setForeground(branco);
+             btnImpressora.setForeground(branco);
+             
+             //Remover a pagina antiga
+             paginas.removeAll();
+             //Criar objeto para nova class
+             CentroCusto hm = new CentroCusto();
+             //Adicionar a nova página
+             paginas.add(hm).setVisible(true);
+         } catch (Exception ex) {
+             Logger.getLogger(GestãoDeStockFINAL.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }//GEN-LAST:event_btnCentroCustoMouseClicked
 
     private void btnCentroCustoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCentroCustoMouseEntered
