@@ -42,7 +42,7 @@ public class Main extends javax.swing.JInternalFrame {
         setBorder(null);
         setPreferredSize(new java.awt.Dimension(1070, 610));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\PAT\\Desktop\\Fundo_quadrados_total_1070x610.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Template_inicio_FIANLO_1070x610.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
