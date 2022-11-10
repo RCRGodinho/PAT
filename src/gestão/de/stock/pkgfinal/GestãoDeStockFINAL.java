@@ -20,6 +20,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
      boolean clickImp;
      boolean clickArm;
      boolean clickCen;
+     boolean clickUti;
     
     /**
      * Creates new form Main
@@ -54,6 +55,8 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
         btnArmazem = new javax.swing.JLabel();
         painelCentroCusto = new javax.swing.JPanel();
         btnCentroCusto = new javax.swing.JLabel();
+        painelUtilizacao = new javax.swing.JPanel();
+        btnUtil = new javax.swing.JLabel();
         paginas = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -178,6 +181,30 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
         });
         painelCentroCusto.add(btnCentroCusto, java.awt.BorderLayout.CENTER);
 
+        painelUtilizacao.setBackground(new java.awt.Color(0, 0, 0));
+        painelUtilizacao.setPreferredSize(new java.awt.Dimension(120, 40));
+        painelUtilizacao.setLayout(new java.awt.BorderLayout());
+
+        btnUtil.setBackground(new java.awt.Color(0, 0, 0));
+        btnUtil.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        btnUtil.setForeground(new java.awt.Color(255, 255, 255));
+        btnUtil.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnUtil.setText("UTILIZAÇÃO");
+        btnUtil.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUtil.setPreferredSize(new java.awt.Dimension(100, 20));
+        btnUtil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUtilMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnUtilMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnUtilMouseExited(evt);
+            }
+        });
+        painelUtilizacao.add(btnUtil, java.awt.BorderLayout.CENTER);
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -190,7 +217,9 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addComponent(logoMainn, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(painelUtilizacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(painelConsumivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, 0)
                 .addComponent(painelImpressora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,7 +227,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
                 .addComponent(painelArmazem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(painelCentroCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+                .addGap(0, 0, 0))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +235,8 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(logoMainn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(painelImpressora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(painelConsumivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(painelConsumivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(painelUtilizacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
             .addGroup(menuPanelLayout.createSequentialGroup()
@@ -222,7 +252,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
         paginas.setLayout(paginasLayout);
         paginasLayout.setHorizontalGroup(
             paginasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1070, Short.MAX_VALUE)
         );
         paginasLayout.setVerticalGroup(
             paginasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,41 +287,6 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnConsumivelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsumivelMouseClicked
-         try {
-             // TODO add your handling code here:
-             
-             //Definir cores
-             clickCon = true;
-             clickImp = false;
-             clickCen = false;
-             clickArm = false;
-             
-             painelConsumivel.setBackground(branco);
-             btnConsumivel.setForeground(preto);
-             
-             painelImpressora.setBackground(preto);
-             painelCentroCusto.setBackground(preto);
-             painelArmazem.setBackground(preto);
-             
-             btnImpressora.setForeground(branco);
-             btnArmazem.setForeground(branco);
-             btnCentroCusto.setForeground(branco);
-             
-             
-             //Remover a pagina antiga
-             paginas.removeAll();
-             //Criar objeto para nova class
-             Consumivel hm = new Consumivel();
-             //Adicionar a nova página
-             paginas.add(hm).setVisible(true);
-             
-         } catch (Exception ex) {
-             Logger.getLogger(GestãoDeStockFINAL.class.getName()).log(Level.SEVERE, null, ex);
-         }
-        
-    }//GEN-LAST:event_btnConsumivelMouseClicked
  
     private void btnImpressoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImpressoraMouseClicked
          try {
@@ -299,6 +294,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
              //Definir cores
              
              clickImp = true;
+             clickUti = false;
              clickCon = false;
              clickCen = false;
              clickArm = false;
@@ -309,10 +305,12 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
              painelConsumivel.setBackground(preto);
              painelCentroCusto.setBackground(preto);
              painelArmazem.setBackground(preto);
+             jLabel2.setBackground(preto);
              
              btnConsumivel.setForeground(branco);
              btnArmazem.setForeground(branco);
              btnCentroCusto.setForeground(branco);
+              
              
              //Remover a pagina antiga
              paginas.removeAll();
@@ -325,29 +323,12 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
          }
     }//GEN-LAST:event_btnImpressoraMouseClicked
 
-    private void btnConsumivelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsumivelMouseEntered
-        // TODO add your handling code here:
-        
-         painelConsumivel.setBackground(branco);
-            btnConsumivel.setForeground(preto);
-    }//GEN-LAST:event_btnConsumivelMouseEntered
-
     private void btnImpressoraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImpressoraMouseEntered
         // TODO add your handling code here:
         
         painelImpressora.setBackground(branco);
             btnImpressora.setForeground(preto);
     }//GEN-LAST:event_btnImpressoraMouseEntered
-
-    private void btnConsumivelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsumivelMouseExited
-        // TODO add your handling code here:
-        if(!clickCon)
-        {
-            painelConsumivel.setBackground(preto);
-            btnConsumivel.setForeground(branco);
-        }
-         
-    }//GEN-LAST:event_btnConsumivelMouseExited
 
     private void btnImpressoraMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImpressoraMouseExited
         // TODO add your handling code here:
@@ -363,6 +344,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
          try {
              // TODO add your handling code here:
              clickCen = false;
+             clickUti = false;
              clickArm = true;
              clickImp = false;
              clickCon = false;
@@ -373,6 +355,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
              painelImpressora.setBackground(preto);
              painelCentroCusto.setBackground(preto);
              painelConsumivel.setBackground(preto);
+             jLabel2.setBackground(preto);
              
              btnImpressora.setForeground(branco);
              btnConsumivel.setForeground(branco);
@@ -410,6 +393,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
          try {
              // TODO add your handling code here:
              clickCen = true;
+             clickUti = false;
              clickArm = false;
              clickImp = false;
              clickCon = false;
@@ -420,6 +404,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
              painelConsumivel.setBackground(preto);
              painelImpressora.setBackground(preto);
              painelArmazem.setBackground(preto);
+             jLabel2.setBackground(preto);
              
              btnConsumivel.setForeground(branco);
              btnArmazem.setForeground(branco);
@@ -455,20 +440,25 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
         // TODO add your handling code here:
         
          clickCen = false;
+         clickUti = false;
         clickArm = false;
         clickImp = false;
         clickCon = false;
         
-         painelCentroCusto.setBackground(preto);
-            btnCentroCusto.setForeground(branco);
+        
             
+             painelCentroCusto.setBackground(preto);
             painelConsumivel.setBackground(preto);
             painelImpressora.setBackground(preto);
             painelArmazem.setBackground(preto);
+            painelUtilizacao.setBackground(preto);
             
+            
+            btnCentroCusto.setForeground(branco);
             btnConsumivel.setForeground(branco);
             btnArmazem.setForeground(branco);
             btnImpressora.setForeground(branco);
+            btnUtil.setForeground(branco);
             
             ////////////////////////////////////////////////////////////
             
@@ -479,6 +469,113 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
         //Adicionar a nova página
         paginas.add(hm).setVisible(true);
     }//GEN-LAST:event_logoMainnMouseClicked
+
+    private void btnUtilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUtilMouseClicked
+        // TODO add your handling code here:
+         try {
+             // TODO add your handling code here:
+             //Definir cores
+             
+             clickImp = false;
+             clickUti = true;
+             clickCon = false;
+             clickCen = false;
+             clickArm = false;
+             
+             painelUtilizacao.setBackground(branco);
+             btnUtil.setForeground(preto);
+             
+             painelConsumivel.setBackground(preto);
+             painelCentroCusto.setBackground(preto);
+             painelArmazem.setBackground(preto);
+             painelImpressora.setBackground(preto);
+             
+             btnConsumivel.setForeground(branco);
+             btnArmazem.setForeground(branco);
+             btnCentroCusto.setForeground(branco);
+             btnImpressora.setForeground(branco);
+              
+             
+             //Remover a pagina antiga
+             paginas.removeAll();
+             //Criar objeto para nova class
+             Utilizacao hm = new Utilizacao();
+             //Adicionar a nova página
+             paginas.add(hm).setVisible(true);
+         } catch (Exception ex) {
+             Logger.getLogger(GestãoDeStockFINAL.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        
+    }//GEN-LAST:event_btnUtilMouseClicked
+
+    private void btnUtilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUtilMouseEntered
+        // TODO add your handling code here:
+         painelUtilizacao.setBackground(branco);
+            btnUtil.setForeground(preto);
+    }//GEN-LAST:event_btnUtilMouseEntered
+
+    private void btnUtilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUtilMouseExited
+        // TODO add your handling code here:
+        if(!clickUti)
+        {
+             painelUtilizacao.setBackground(preto);
+            btnUtil.setForeground(branco);
+        }
+    }//GEN-LAST:event_btnUtilMouseExited
+
+    private void btnConsumivelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsumivelMouseClicked
+        // TODO add your handling code here:
+         try {
+             // TODO add your handling code here:
+             //Definir cores
+             
+             clickImp = false;
+             clickUti = false;
+             clickCon = true;
+             clickCen = false;
+             clickArm = false;
+             
+             painelConsumivel.setBackground(branco);
+             btnConsumivel.setForeground(preto);
+             
+             
+             painelCentroCusto.setBackground(preto);
+             painelArmazem.setBackground(preto);
+             painelUtilizacao.setBackground(preto);
+             painelImpressora.setBackground(preto);
+             
+             btnUtil.setForeground(branco);
+             btnArmazem.setForeground(branco);
+             btnCentroCusto.setForeground(branco);
+             btnImpressora.setForeground(branco);
+              
+             
+             //Remover a pagina antiga
+             paginas.removeAll();
+             //Criar objeto para nova class
+             Consumivel hm = new Consumivel();
+             //Adicionar a nova página
+             paginas.add(hm).setVisible(true);
+         } catch (Exception ex) {
+             Logger.getLogger(GestãoDeStockFINAL.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }//GEN-LAST:event_btnConsumivelMouseClicked
+
+    private void btnConsumivelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsumivelMouseEntered
+        // TODO add your handling code here:
+         painelConsumivel.setBackground(branco);
+            btnConsumivel.setForeground(preto);
+    }//GEN-LAST:event_btnConsumivelMouseEntered
+
+    private void btnConsumivelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsumivelMouseExited
+        // TODO add your handling code here:
+        
+         if(!clickCon)
+        {
+             painelConsumivel.setBackground(preto);
+            btnConsumivel.setForeground(branco);
+        }
+    }//GEN-LAST:event_btnConsumivelMouseExited
 
     
     
@@ -525,6 +622,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
     private javax.swing.JLabel btnCentroCusto;
     private javax.swing.JLabel btnConsumivel;
     private javax.swing.JLabel btnImpressora;
+    private javax.swing.JLabel btnUtil;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel logoMainn;
     private javax.swing.JPanel mainPanel;
@@ -534,5 +632,6 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
     private javax.swing.JPanel painelCentroCusto;
     private javax.swing.JPanel painelConsumivel;
     private javax.swing.JPanel painelImpressora;
+    private javax.swing.JPanel painelUtilizacao;
     // End of variables declaration//GEN-END:variables
 }
