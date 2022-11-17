@@ -7,6 +7,8 @@ package gestão.de.stock.pkgfinal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +31,7 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
     public Utilizacao() throws Exception {
         initComponents();
         setPainelFixo();
-        tabelaConsumivel();
+        tabelaUtilizacao();
         comboOracle();
     }
     
@@ -52,22 +54,25 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         tabela = new javax.swing.JTable();
         dados = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        nna = new javax.swing.JTextField();
+        ic = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        nome = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        umc = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        preco = new javax.swing.JTextField();
+        PRETO = new javax.swing.JLabel();
+        preto = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
-        referencia = new javax.swing.JTextField();
+        cor = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
         comboImpressora = new javax.swing.JComboBox<>();
+        data = new com.toedter.calendar.JDateChooser();
+        jSeparator6 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        comboImpressora1 = new javax.swing.JComboBox<>();
+        quantidade = new javax.swing.JSpinner();
         butoes = new javax.swing.JPanel();
         btnAdicionar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -81,20 +86,20 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         tabela.setForeground(new java.awt.Color(0, 0, 0));
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "NNA", "NOME", "UMC", "PRECO", "REFERENCIA", "IMPRESSORA"
+                "ID", "IC", "QUANTIDADE", "DATA", "PRETO", "COR", "ID_CONS", "ID_CEN"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -123,79 +128,101 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tabela);
         if (tabela.getColumnModel().getColumnCount() > 0) {
+            tabela.getColumnModel().getColumn(0).setResizable(false);
             tabela.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tabela.getColumnModel().getColumn(1).setResizable(false);
+            tabela.getColumnModel().getColumn(2).setResizable(false);
+            tabela.getColumnModel().getColumn(3).setResizable(false);
+            tabela.getColumnModel().getColumn(4).setResizable(false);
+            tabela.getColumnModel().getColumn(5).setResizable(false);
+            tabela.getColumnModel().getColumn(6).setResizable(false);
+            tabela.getColumnModel().getColumn(7).setResizable(false);
         }
 
-        jLabel1.setLabelFor(nna);
-        jLabel1.setText("NNA");
+        jLabel1.setLabelFor(ic);
+        jLabel1.setText("IC");
 
-        nna.addKeyListener(new java.awt.event.KeyAdapter() {
+        ic.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                nnaKeyTyped(evt);
+                icKeyTyped(evt);
             }
         });
 
-        jLabel2.setText("NOME");
+        jLabel2.setText("QUANTIDADE");
 
-        jLabel3.setText("UMC");
+        jLabel3.setText("DATA");
 
-        umc.addKeyListener(new java.awt.event.KeyAdapter() {
+        PRETO.setText("PRETO");
+
+        jLabel5.setText("COR");
+
+        cor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                umcKeyTyped(evt);
+                corKeyTyped(evt);
             }
         });
 
-        jLabel4.setText("PREÇO");
-
-        jLabel5.setText("REFERENCIA");
-
-        referencia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                referenciaKeyTyped(evt);
-            }
-        });
-
-        jLabel6.setText("IMPRESSORA");
+        jLabel6.setText("CONSUMIVEL");
 
         comboImpressora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        data.setMinimumSize(new java.awt.Dimension(5, 19));
+        data.setOpaque(false);
+        data.setPreferredSize(new java.awt.Dimension(5, 19));
+
+        jLabel7.setText("LOCALIZAÇÃO");
+
+        comboImpressora1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        quantidade.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         javax.swing.GroupLayout dadosLayout = new javax.swing.GroupLayout(dados);
         dados.setLayout(dadosLayout);
         dadosLayout.setHorizontalGroup(
             dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dadosLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
                 .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator5)
-                    .addComponent(jSeparator4)
-                    .addComponent(jSeparator3)
-                    .addComponent(jSeparator2)
-                    .addComponent(jSeparator1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nna))
                     .addGroup(dadosLayout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(preco))
+                        .addGap(12, 12, 12)
+                        .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator5)
+                            .addComponent(jSeparator4)
+                            .addComponent(jSeparator3)
+                            .addComponent(jSeparator2)
+                            .addComponent(jSeparator1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosLayout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ic))
+                            .addGroup(dadosLayout.createSequentialGroup()
+                                .addComponent(PRETO, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(preto))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosLayout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosLayout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cor))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(dadosLayout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboImpressora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(dadosLayout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addComponent(jSeparator6))
+                    .addGroup(dadosLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboImpressora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosLayout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(umc))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosLayout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(referencia))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(comboImpressora1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         dadosLayout.setVerticalGroup(
@@ -203,38 +230,44 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
             .addGroup(dadosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(umc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(preco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(preto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PRETO))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(referencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(comboImpressora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(comboImpressora1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -313,7 +346,7 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void tabelaConsumivel() throws Exception{
+    public void tabelaUtilizacao() throws Exception{
         
          try{
              //definir a tabela
@@ -322,13 +355,13 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
              
          
              //criar uma query e executar
-         ResultSet rs = stm.executeQuery("SELECT ID_CONSUMIVEL, NNA, NOME, UMC, PRECO, REFERENCIA, (MARCA || '_' || MODELO) AS IMPRESSORA FROM CONSUMIVEL a, IMPRESSORA b WHERE a.ID_IMPRESSORA = b.ID_IMPRESSORA");
+         ResultSet rs = stm.executeQuery("SELECT ID_UTILIZACAO, IC, QUANTIDADE, to_char(DATA_Util,'DD/MM/YYYY') DATA_Util, PRETO, COR, ID_CONSUMIVEL, ID_CENTRO_CUSTO FROM Utilizacao");
              
            while(rs.next())
            {
                //passar os dados da BD para um object
-               Object o[] = {rs.getInt("ID_CONSUMIVEL"),rs.getString("NNA"), rs.getString("NOME"),
-               rs.getString("UMC"), rs.getDouble("PRECO"), rs.getString("REFERENCIA"), rs.getString("IMPRESSORA")};
+               Object o[] = {rs.getInt("ID_UTILIZACAO"),rs.getString("IC"), rs.getString("QUANTIDADE"),
+               rs.getString("DATA_Util"), rs.getDouble("PRETO"), rs.getString("COR"), rs.getString("ID_CONSUMIVEL"), rs.getString("ID_CENTRO_CUSTO")};
                //Adicionar os dados à tabela
                table.addRow(o);
        }
@@ -343,14 +376,14 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
     
     public void limparCampos(){
         
-        nna.setText("");
-        nome.setText("");
-        umc.setText("");
-        preco.setText("");
-        referencia.setText("");
+        ic.setText("");
+        quantidade.setValue(0);
+        data.setDate(null);
+        preto.setText("");
+        cor.setText("");
     }
     
-    void buscarDados(){
+    void buscarDados() throws ParseException{
         
         if(tabela.getSelectedRow() == -1)
          {
@@ -358,11 +391,14 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
          }else{
             int row = tabela.getSelectedRow();
             
-            nna.setText(tabela.getModel().getValueAt(row, 1).toString());
-            nome.setText(tabela.getModel().getValueAt(row, 2).toString());
-            umc.setText(tabela.getModel().getValueAt(row, 3).toString());
-            preco.setText(tabela.getModel().getValueAt(row, 4).toString());
-            referencia.setText(tabela.getModel().getValueAt(row, 5).toString());
+            ic.setText(tabela.getModel().getValueAt(row, 1).toString());
+            quantidade.setValue(Integer.parseInt(tabela.getModel().getValueAt(row, 2).toString()));
+            String databela = tabela.getModel().getValueAt(row, 3).toString();
+                java.util.Date date2 = new SimpleDateFormat("dd-MM-yyyy").parse(databela);
+                
+            data.setDate(date2);
+            preto.setText(tabela.getModel().getValueAt(row, 4).toString());
+            cor.setText(tabela.getModel().getValueAt(row, 5).toString());
             comboImpressora.setSelectedItem(tabela.getValueAt(row, 6).toString());
         }
     }
@@ -370,12 +406,12 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
         // TODO add your handling code here:
         
-        if(nna.getText().isEmpty() || nome.getText().isEmpty() || umc.getText().isEmpty() || preco.getText().isEmpty() || referencia.getText().isEmpty())
+        if(ic.getText().isEmpty() || quantidade.getValue().equals(0) || data.getDate() == null || preto.getText().isEmpty() || cor.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(rootPane, "Todos os dados têm que ser preenchidos!");
         }else{
             //Verificar se todos têm o mesmo tamanho.
-            if(nna.getText().length()<13 || umc.getText().length()<8 || referencia.getText().length()<8){
+            if(ic.getText().length()<12){
              JOptionPane.showMessageDialog(rootPane, "Há dados que não têm o tamanho suficiente");
             }
             else{
@@ -387,14 +423,14 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
              stm = c.fazerConexao().createStatement();
              
              
-        stm.executeUpdate("UPDATE Consumivel SET NNA = '"+nna.getText().toUpperCase()+"' ,NOME = '"+nome.getText().toUpperCase()+"' , UMC = "+Integer.parseInt(umc.getText())+" , PRECO = "+Float.parseFloat(preco.getText())+" , REFERENCIA = "+Integer.parseInt(referencia.getText())+" , ID_IMPRESSORA ="+comboSplit()+" WHERE ID_CONSUMIVEL = "+Integer.parseInt(value)+"");
+        //stm.executeUpdate("UPDATE Consumivel SET NNA = '"+ic.getText().toUpperCase()+"' ,NOME = '"+quantidade.getText().toUpperCase()+"' , UMC = "+Integer.parseInt(data.getText())+" , PRECO = "+Float.parseFloat(preto.getText())+" , REFERENCIA = "+Integer.parseInt(cor.getText())+" , ID_IMPRESSORA ="+comboSplit()+" WHERE ID_CONSUMIVEL = "+Integer.parseInt(value)+"");
              
              
              JOptionPane.showMessageDialog(rootPane, "Dado editado com sucesso!");
                 
              tabela.clearSelection();
              limparCampos();
-             tabelaConsumivel();
+             tabelaUtilizacao();
         } catch (ClassNotFoundException| SQLException ex) {
             
             JOptionPane.showMessageDialog(rootPane, "ERRO!");
@@ -428,7 +464,7 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
                  {
                      ResultSet rs = stm.executeQuery("DELETE FROM Consumivel WHERE ID_CONSUMIVEL = "+Integer.parseInt(value));
                      JOptionPane.showMessageDialog(rootPane, "Dado apagado com sucesso!");
-                     tabelaConsumivel();
+                     tabelaUtilizacao();
                      tabela.clearSelection();
                      limparCampos();
                  }
@@ -444,18 +480,22 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnApagarMouseClicked
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-        // TODO add your handling code here:
-        buscarDados();
+        try {
+            // TODO add your handling code here:
+            buscarDados();
+        } catch (ParseException ex) {
+            Logger.getLogger(Utilizacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_tabelaMouseClicked
 
-    private void nnaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nnaKeyTyped
+    private void icKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_icKeyTyped
         // TODO add your handling code here:
-        if(nna.getText().length()>=13)
+        if(ic.getText().length()>=13)
     {
         //nna.setText(nna.getText().substring(0, 13));
     }
-    }//GEN-LAST:event_nnaKeyTyped
+    }//GEN-LAST:event_icKeyTyped
 
      
     
@@ -463,12 +503,12 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
         //Verificar se os campos estão vazios.
-        if(nna.getText().isEmpty() || nome.getText().isEmpty() || umc.getText().isEmpty() || preco.getText().isEmpty() || referencia.getText().isEmpty())
+        if(ic.getText().isEmpty() || quantidade.getValue().equals(0) || data.getDate() == null || preto.getText().isEmpty() || cor.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(rootPane, "Todos os dados têm que ser preenchidos!");
         }else{
             //Verificar se todos têm o mesmo tamanho.
-            if(nna.getText().length()<12 || umc.getText().length()<7 || referencia.getText().length()<7){
+            if(ic.getText().length()<12 || cor.getText().length()<7){
              JOptionPane.showMessageDialog(rootPane, "Há dados que não têm o tamanho suficiente");
             }
             else{
@@ -476,13 +516,13 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         
         try {
              
-             stm.executeUpdate("INSERT INTO Consumivel(NNA,NOME,UMC,Preco,Referencia,ID_Impressora) VALUES('"+nna.getText().toUpperCase()+"' , '"+nome.getText().toUpperCase()+"' , "+Integer.parseInt(umc.getText())+" , "+Float.parseFloat(preco.getText())+" , "+Integer.parseInt(referencia.getText())+" , "+comboSplit()+")");
+             //stm.executeUpdate("INSERT INTO Consumivel(NNA,NOME,UMC,Preco,Referencia,ID_Impressora) VALUES('"+ic.getText().toUpperCase()+"' , '"+quantidade.getText().toUpperCase()+"' , "+Integer.parseInt(data.getText())+" , "+Float.parseFloat(preto.getText())+" , "+Integer.parseInt(cor.getText())+" , "+comboSplit()+")");
              
              
              JOptionPane.showMessageDialog(rootPane, "Dado inserido com sucesso!");
     
                     limparCampos();
-                    tabelaConsumivel();
+                    tabelaUtilizacao();
              
         } catch (SQLException | ClassNotFoundException ex) {
             
@@ -501,21 +541,13 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_tabelaFocusLost
 
-    private void umcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_umcKeyTyped
+    private void corKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_corKeyTyped
         // TODO add your handling code here:
-        if(umc.getText().length()>=8)
-    {
-       // umc.setText(umc.getText().substring(0, 8));
-    }
-    }//GEN-LAST:event_umcKeyTyped
-
-    private void referenciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_referenciaKeyTyped
-        // TODO add your handling code here:
-        if(referencia.getText().length()>=8)
+        if(cor.getText().length()>=8)
     {
         //referencia.setText(referencia.getText().substring(0, 8));
     }
-    }//GEN-LAST:event_referenciaKeyTyped
+    }//GEN-LAST:event_corKeyTyped
 
     public ArrayList listaImpressora() throws Exception{
         ArrayList list = new ArrayList<>();
@@ -564,36 +596,39 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
              }
              return id;
              
-        }catch(Exception exp){
+        }catch(SQLException exp){
             return 0;
         }
         
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel PRETO;
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnApagar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JPanel butoes;
     private javax.swing.JComboBox<String> comboImpressora;
+    private javax.swing.JComboBox<String> comboImpressora1;
+    private javax.swing.JTextField cor;
     private javax.swing.JPanel dados;
+    private com.toedter.calendar.JDateChooser data;
+    private javax.swing.JTextField ic;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTextField nna;
-    private javax.swing.JTextField nome;
-    private javax.swing.JTextField preco;
-    private javax.swing.JTextField referencia;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JTextField preto;
+    private javax.swing.JSpinner quantidade;
     private javax.swing.JTable tabela;
-    private javax.swing.JTextField umc;
     // End of variables declaration//GEN-END:variables
 }
