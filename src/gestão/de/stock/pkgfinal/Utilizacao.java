@@ -7,11 +7,13 @@ package gestão.de.stock.pkgfinal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
@@ -32,7 +34,8 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         initComponents();
         setPainelFixo();
         tabelaUtilizacao();
-        comboOracle();
+        comboOracle(listaConsumivel(),comboConsumivel);
+        comboOracle(listaLocalizacao(),comboLocalizacao);
     }
     
     private void setPainelFixo(){
@@ -67,11 +70,11 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         cor = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
-        comboImpressora = new javax.swing.JComboBox<>();
+        comboConsumivel = new javax.swing.JComboBox<>();
         data = new com.toedter.calendar.JDateChooser();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
-        comboImpressora1 = new javax.swing.JComboBox<>();
+        comboLocalizacao = new javax.swing.JComboBox<>();
         quantidade = new javax.swing.JSpinner();
         butoes = new javax.swing.JPanel();
         btnAdicionar = new javax.swing.JButton();
@@ -92,7 +95,7 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "IC", "QUANTIDADE", "DATA", "PRETO", "COR", "ID_CONS", "ID_CEN"
+                "ID", "IC", "QUANTIDADE", "DATA", "PRETO", "COR", "CONSUMIVEL", "LOCALIZACAO"
             }
         ) {
             Class[] types = new Class [] {
@@ -164,7 +167,7 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
 
         jLabel6.setText("CONSUMIVEL");
 
-        comboImpressora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboConsumivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         data.setMinimumSize(new java.awt.Dimension(5, 19));
         data.setOpaque(false);
@@ -172,7 +175,7 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
 
         jLabel7.setText("LOCALIZAÇÃO");
 
-        comboImpressora1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboLocalizacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         quantidade.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
@@ -181,94 +184,96 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         dadosLayout.setHorizontalGroup(
             dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dadosLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
                 .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dadosLayout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator5)
-                            .addComponent(jSeparator4)
-                            .addComponent(jSeparator3)
-                            .addComponent(jSeparator2)
-                            .addComponent(jSeparator1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosLayout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ic))
-                            .addGroup(dadosLayout.createSequentialGroup()
-                                .addComponent(PRETO, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(preto))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosLayout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosLayout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cor))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(dadosLayout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboImpressora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(ic, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(dadosLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator6))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(dadosLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(dadosLayout.createSequentialGroup()
+                        .addComponent(PRETO, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(preto, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(dadosLayout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(cor, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(dadosLayout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(comboConsumivel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(dadosLayout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboImpressora1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(12, 12, 12)
+                        .addComponent(comboLocalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         dadosLayout.setVerticalGroup(
             dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dadosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(dadosLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel1))
+                    .addComponent(ic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dadosLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel2))
+                    .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(preto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PRETO))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
+                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dadosLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(PRETO))
+                    .addComponent(preto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(cor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(comboImpressora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
+                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dadosLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel6))
+                    .addComponent(comboConsumivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(comboImpressora1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(6, 6, 6)
+                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dadosLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel7))
+                    .addComponent(comboLocalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         btnAdicionar.setText("Adicionar");
@@ -324,7 +329,7 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
                     .addComponent(butoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(dados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 6, Short.MAX_VALUE)))
+                        .addGap(0, 18, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -355,13 +360,13 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
              
          
              //criar uma query e executar
-         ResultSet rs = stm.executeQuery("SELECT ID_UTILIZACAO, IC, QUANTIDADE, to_char(DATA_Util,'DD/MM/YYYY') DATA_Util, PRETO, COR, ID_CONSUMIVEL, ID_CENTRO_CUSTO FROM Utilizacao");
+         ResultSet rs = stm.executeQuery("SELECT ID_UTILIZACAO, IC, QUANTIDADE, to_char(DATA_Util,'DD/MM/YYYY') DATA_Util, PRETO, COR, NOME, LOCALIZACAO FROM Utilizacao a, Consumivel b, centro_custo c  WHERE a.ID_CONSUMIVEL = b.ID_CONSUMIVEL AND a.ID_CENTRO_CUSTO = c.ID_CENTRO_CUSTO");
              
            while(rs.next())
            {
                //passar os dados da BD para um object
-               Object o[] = {rs.getInt("ID_UTILIZACAO"),rs.getString("IC"), rs.getString("QUANTIDADE"),
-               rs.getString("DATA_Util"), rs.getDouble("PRETO"), rs.getString("COR"), rs.getString("ID_CONSUMIVEL"), rs.getString("ID_CENTRO_CUSTO")};
+               Object o[] = {rs.getInt("ID_UTILIZACAO"),rs.getString("IC"), rs.getInt("QUANTIDADE"),
+               rs.getString("DATA_Util"), rs.getInt("PRETO"), rs.getString("COR"), rs.getString("NOME"), rs.getString("LOCALIZACAO")};
                //Adicionar os dados à tabela
                table.addRow(o);
        }
@@ -393,37 +398,50 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
             
             ic.setText(tabela.getModel().getValueAt(row, 1).toString());
             quantidade.setValue(Integer.parseInt(tabela.getModel().getValueAt(row, 2).toString()));
+            
+            ///////////////////////Data/////////////////////////////////////////
             String databela = tabela.getModel().getValueAt(row, 3).toString();
-                java.util.Date date2 = new SimpleDateFormat("dd-MM-yyyy").parse(databela);
-                
-            data.setDate(date2);
+                java.util.Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(databela);
+                    data.setDate(date2);
+           /////////////////////////////////////////////////////////////////////
+           
             preto.setText(tabela.getModel().getValueAt(row, 4).toString());
             cor.setText(tabela.getModel().getValueAt(row, 5).toString());
-            comboImpressora.setSelectedItem(tabela.getValueAt(row, 6).toString());
+            ///////////////////////////COMBOS///////////////////////////////////
+            
+            comboConsumivel.setSelectedItem(tabela.getValueAt(row, 6).toString());
+            comboLocalizacao.setSelectedItem(tabela.getValueAt(row, 7).toString());
+            
         }
     }
+
     
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
         // TODO add your handling code here:
+        
+        System.out.println(DateFormat.getDateInstance().format(data.getDate()));
         
         if(ic.getText().isEmpty() || quantidade.getValue().equals(0) || data.getDate() == null || preto.getText().isEmpty() || cor.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(rootPane, "Todos os dados têm que ser preenchidos!");
         }else{
             //Verificar se todos têm o mesmo tamanho.
-            if(ic.getText().length()<12){
+            if(ic.getText().length()<11){
              JOptionPane.showMessageDialog(rootPane, "Há dados que não têm o tamanho suficiente");
             }
             else{
         
         int row = tabela.getSelectedRow();
                String value = tabela.getModel().getValueAt(row, 0).toString();
+               
+                 System.out.println(comboSplit(2));
+                 System.out.println(comboSplit(1));
         
         try{
              stm = c.fazerConexao().createStatement();
              
              
-        //stm.executeUpdate("UPDATE Consumivel SET NNA = '"+ic.getText().toUpperCase()+"' ,NOME = '"+quantidade.getText().toUpperCase()+"' , UMC = "+Integer.parseInt(data.getText())+" , PRECO = "+Float.parseFloat(preto.getText())+" , REFERENCIA = "+Integer.parseInt(cor.getText())+" , ID_IMPRESSORA ="+comboSplit()+" WHERE ID_CONSUMIVEL = "+Integer.parseInt(value)+"");
+stm.executeUpdate("UPDATE Utilizacao SET IC = '"+ic.getText().toUpperCase()+"' ,QUANTIDADE = '"+quantidade.getValue()+"' , DATA_UTIL = TO_DATE('"+DateFormat.getDateInstance().format(data.getDate())+"', 'DD/MM/YYYY') , PRETO = "+Integer.parseInt(preto.getText())+" , COR = "+Integer.parseInt(cor.getText())+" , ID_CONSUMIVEL ="+comboSplit(1)+", ID_CENTRO_CUSTO = "+comboSplit(2)+" WHERE ID_UTILIZACAO = "+Integer.parseInt(value)+"");
              
              
              JOptionPane.showMessageDialog(rootPane, "Dado editado com sucesso!");
@@ -433,7 +451,7 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
              tabelaUtilizacao();
         } catch (ClassNotFoundException| SQLException ex) {
             
-            JOptionPane.showMessageDialog(rootPane, "ERRO!");
+            JOptionPane.showMessageDialog(rootPane, "ERRO!\n"+ex);
             
         } catch (Exception ex) {
             Logger.getLogger(Utilizacao.class.getName()).log(Level.SEVERE, null, ex);
@@ -516,7 +534,7 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         
         try {
              
-             //stm.executeUpdate("INSERT INTO Consumivel(NNA,NOME,UMC,Preco,Referencia,ID_Impressora) VALUES('"+ic.getText().toUpperCase()+"' , '"+quantidade.getText().toUpperCase()+"' , "+Integer.parseInt(data.getText())+" , "+Float.parseFloat(preto.getText())+" , "+Integer.parseInt(cor.getText())+" , "+comboSplit()+")");
+             //stm.executeUpdate("INSERT INTO Consumivel(NNA,NOME,UMC,Preco,Referencia,ID_Impressora) VALUES('"+ic.getText().toUpperCase()+"' , '"+quantidade.getText().toUpperCase()+"' , "+Integer.parseInt(data.getText())+" , "+Integer.parseInt(preto.getText())+" , "+Integer.parseInt(cor.getText())+" , "+comboSplit()+")");
              
              
              JOptionPane.showMessageDialog(rootPane, "Dado inserido com sucesso!");
@@ -549,16 +567,16 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
     }
     }//GEN-LAST:event_corKeyTyped
 
-    public ArrayList listaImpressora() throws Exception{
+    public ArrayList listaConsumivel() throws Exception{
         ArrayList list = new ArrayList<>();
         
         try{
             
-            ResultSet rs = stm.executeQuery("SELECT (MARCA || '_' || MODELO) AS IMPRESSORA FROM IMPRESSORA");
+            ResultSet rs = stm.executeQuery("SELECT NOME FROM CONSUMIVEL");
 
             while(rs.next())
             {
-                list.add(rs.getString("IMPRESSORA"));
+                list.add(rs.getString("NOME"));
             }
             
             
@@ -569,38 +587,76 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         return list;
     }
     
-    private void comboOracle() throws SQLException, ClassNotFoundException, Exception{
+    private void comboOracle(ArrayList x, JComboBox c) throws SQLException, ClassNotFoundException, Exception{
         
-        comboImpressora.removeAllItems();
-        Iterable<String> lista = listaImpressora();
+        c.removeAllItems();
+        Iterable<String> lista = x;
         
-        for(String impressora : lista)
+        for(String consumivel : lista)
         {
-            comboImpressora.addItem(impressora);
+            c.addItem(consumivel);
         }
     }
     
-    private int comboSplit(){
-        
-        String[] result =comboImpressora.getSelectedItem().toString().split("_");
-            String marca = result[0];
-            String modelo = result[1];
+    public ArrayList listaLocalizacao() throws Exception{
+        ArrayList list = new ArrayList<>();
         
         try{
-             ResultSet rs;
-             int id = 0;
-             rs = stm.executeQuery("SELECT ID_Impressora FROM IMPRESSORA WHERE IMPRESSORA.MARCA = '"+marca+"' AND IMPRESSORA.Modelo = '"+modelo+"'");
-             while(rs.next())
-             {
-                id = rs.getInt(1);
-             }
-             return id;
-             
+            
+            ResultSet rs = stm.executeQuery("SELECT LOCALIZACAO FROM CENTRO_CUSTO");
+
+            while(rs.next())
+            {
+                list.add(rs.getString("LOCALIZACAO"));
+            }
+            
+            
         }catch(SQLException exp){
-            return 0;
+            throw new Exception (exp.getMessage());
         }
         
+        return list;
     }
+     
+    private int comboSplit(int x){
+        
+        try{
+            ResultSet rs;
+            int id = 0;
+            
+            switch(x)
+            {
+                case 1 -> {
+                    rs = stm.executeQuery("SELECT ID_CONSUMIVEL FROM CONSUMIVEL WHERE NOME = '"+comboConsumivel.getSelectedItem()+"'");
+                    while(rs.next())
+                    {
+                        id = rs.getInt(1);
+                    }
+                    return id;
+                }
+                case 2 -> {
+                    rs = stm.executeQuery("SELECT ID_CENTRO_CUSTO FROM CENTRO_CUSTO WHERE LOCALIZACAO = '"+comboLocalizacao.getSelectedItem()+"'");
+                    while(rs.next())
+                    {
+                        id = rs.getInt(1);
+                    }  
+                    return id;
+                }
+                default -> {
+                }
+            }
+             
+             
+             
+        }catch(Exception exp){
+            return 0;
+        }
+        return -1;
+    }
+    
+
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PRETO;
@@ -608,8 +664,8 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnApagar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JPanel butoes;
-    private javax.swing.JComboBox<String> comboImpressora;
-    private javax.swing.JComboBox<String> comboImpressora1;
+    private javax.swing.JComboBox<String> comboConsumivel;
+    private javax.swing.JComboBox<String> comboLocalizacao;
     private javax.swing.JTextField cor;
     private javax.swing.JPanel dados;
     private com.toedter.calendar.JDateChooser data;

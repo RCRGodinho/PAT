@@ -5,6 +5,7 @@
 package gestão.de.stock.pkgfinal;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,6 +29,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
     public GestãoDeStockFINAL() {
         initComponents();
         setResizable(false);
+        setLocationRelativeTo(null);
        
        Main main = new Main();
        paginas.add(main).setVisible(true);
@@ -75,6 +77,9 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
         logoMainn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logoMainnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                logoMainnMouseEntered(evt);
             }
         });
 
@@ -210,13 +215,11 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addContainerGap()
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addComponent(logoMainn, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
+                        .addComponent(logoMainn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(painelUtilizacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -325,6 +328,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
 
     private void btnImpressoraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImpressoraMouseEntered
         // TODO add your handling code here:
+        painelImpressora.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         painelImpressora.setBackground(branco);
             btnImpressora.setForeground(preto);
@@ -374,6 +378,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
 
     private void btnArmazemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArmazemMouseEntered
         // TODO add your handling code here:
+        painelArmazem.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         painelArmazem.setBackground(branco);
             btnArmazem.setForeground(preto);
@@ -405,10 +410,12 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
              painelImpressora.setBackground(preto);
              painelArmazem.setBackground(preto);
              jLabel2.setBackground(preto);
+             painelUtilizacao.setBackground(preto);
              
              btnConsumivel.setForeground(branco);
              btnArmazem.setForeground(branco);
              btnImpressora.setForeground(branco);
+             btnUtil.setForeground(branco);
              
              //Remover a pagina antiga
              paginas.removeAll();
@@ -423,6 +430,8 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
 
     private void btnCentroCustoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCentroCustoMouseEntered
         // TODO add your handling code here:
+        painelCentroCusto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
         painelCentroCusto.setBackground(branco);
             btnCentroCusto.setForeground(preto);
     }//GEN-LAST:event_btnCentroCustoMouseEntered
@@ -510,6 +519,7 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
 
     private void btnUtilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUtilMouseEntered
         // TODO add your handling code here:
+        painelUtilizacao.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
          painelUtilizacao.setBackground(branco);
             btnUtil.setForeground(preto);
     }//GEN-LAST:event_btnUtilMouseEntered
@@ -563,6 +573,8 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
 
     private void btnConsumivelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsumivelMouseEntered
         // TODO add your handling code here:
+        painelConsumivel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
          painelConsumivel.setBackground(branco);
             btnConsumivel.setForeground(preto);
     }//GEN-LAST:event_btnConsumivelMouseEntered
@@ -576,6 +588,11 @@ public class GestãoDeStockFINAL extends javax.swing.JFrame {
             btnConsumivel.setForeground(branco);
         }
     }//GEN-LAST:event_btnConsumivelMouseExited
+
+    private void logoMainnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoMainnMouseEntered
+        // TODO add your handling code here:
+        logoMainn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_logoMainnMouseEntered
 
     
     

@@ -54,6 +54,9 @@ public final class Impressora extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         modelo = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        IC = new javax.swing.JLabel();
+        ic = new javax.swing.JTextField();
         butoes = new javax.swing.JPanel();
         btnAdicionar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -67,20 +70,20 @@ public final class Impressora extends javax.swing.JInternalFrame {
         tabela.setForeground(new java.awt.Color(0, 0, 0));
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "MARCA", "MODELO"
+                "ID", "IC", "MARCA", "MODELO"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -124,6 +127,8 @@ public final class Impressora extends javax.swing.JInternalFrame {
 
         jLabel2.setText("MODELO");
 
+        IC.setText("IC");
+
         javax.swing.GroupLayout dadosLayout = new javax.swing.GroupLayout(dados);
         dados.setLayout(dadosLayout);
         dadosLayout.setHorizontalGroup(
@@ -131,32 +136,48 @@ public final class Impressora extends javax.swing.JInternalFrame {
             .addGroup(dadosLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosLayout.createSequentialGroup()
+                    .addGroup(dadosLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(marca))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dadosLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(12, 12, 12)
+                        .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(dadosLayout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGap(12, 12, 12)
+                        .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(dadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(dadosLayout.createSequentialGroup()
+                        .addComponent(IC, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(ic, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         dadosLayout.setVerticalGroup(
             dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dadosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
+                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dadosLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel1))
+                    .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dadosLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel2))
+                    .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
                 .addGroup(dadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IC))
+                .addContainerGap())
         );
 
         btnAdicionar.setText("Adicionar");
@@ -212,7 +233,7 @@ public final class Impressora extends javax.swing.JInternalFrame {
                     .addComponent(butoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(dados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 6, Short.MAX_VALUE)))
+                        .addGap(0, 18, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -243,12 +264,12 @@ public final class Impressora extends javax.swing.JInternalFrame {
              
          
              //criar uma query e executar
-         ResultSet rs = stm.executeQuery("SELECT ID_IMPRESSORA, MARCA, MODELO FROM Impressora");
+         ResultSet rs = stm.executeQuery("SELECT ID_IMPRESSORA,IC, MARCA, MODELO FROM Impressora");
              
            while(rs.next())
            {
                //passar os dados da BD para um object
-               Object o[] = {rs.getInt("ID_IMPRESSORA"),rs.getString("MARCA"), rs.getString("MODELO")};
+               Object o[] = {rs.getInt("ID_IMPRESSORA"),rs.getString("IC"),rs.getString("MARCA"), rs.getString("MODELO")};
                //Adicionar os dados à tabela
                table.addRow(o);
        }
@@ -263,6 +284,7 @@ public final class Impressora extends javax.swing.JInternalFrame {
     
     public void limparCampos(){
         
+        ic.setText("");
         marca.setText("");
         modelo.setText("");
        
@@ -276,15 +298,16 @@ public final class Impressora extends javax.swing.JInternalFrame {
          }else{
             int row = tabela.getSelectedRow();
             
-            marca.setText(tabela.getModel().getValueAt(row, 1).toString());
-            modelo.setText(tabela.getModel().getValueAt(row, 2).toString());
+            ic.setText(tabela.getModel().getValueAt(row, 1).toString());
+            marca.setText(tabela.getModel().getValueAt(row, 2).toString());
+            modelo.setText(tabela.getModel().getValueAt(row, 3).toString());
         }
     }
     
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
         // TODO add your handling code here:
         
-        if(marca.getText().isEmpty() || modelo.getText().isEmpty() )
+        if(ic.getText().isEmpty() || marca.getText().isEmpty() || modelo.getText().isEmpty() )
         {
             JOptionPane.showMessageDialog(rootPane, "Todos os dados têm que ser preenchidos!");
         }else{
@@ -296,7 +319,7 @@ public final class Impressora extends javax.swing.JInternalFrame {
              stm = c.fazerConexao().createStatement();
              
   
-        stm.executeUpdate("UPDATE Impressora SET MARCA = '"+marca.getText().toUpperCase()+"' ,MODELO = '"+modelo.getText().toUpperCase()+"' WHERE ID_IMPRESSORA = "+Integer.parseInt(value)+"");
+        stm.executeUpdate("UPDATE Impressora SET IC = '"+ic.getText().toUpperCase()+"', MARCA = '"+marca.getText().toUpperCase()+"' ,MODELO = '"+modelo.getText().toUpperCase()+"' WHERE ID_IMPRESSORA = "+Integer.parseInt(value)+"");
              
         
              
@@ -380,7 +403,7 @@ public final class Impressora extends javax.swing.JInternalFrame {
             else{
         try {
              
-             stm.executeUpdate("INSERT INTO IMPRESSORA(MARCA,MODELO) VALUES('"+marca.getText().toUpperCase()+"' , '"+modelo.getText().toUpperCase()+"')");
+             stm.executeUpdate("INSERT INTO IMPRESSORA(IC,MARCA,MODELO) VALUES('"+ic.getText().toUpperCase()+"' ,'"+marca.getText().toUpperCase()+"' , '"+modelo.getText().toUpperCase()+"')");
              
              
              JOptionPane.showMessageDialog(rootPane, "Dado inserido com sucesso!");
@@ -408,15 +431,18 @@ public final class Impressora extends javax.swing.JInternalFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel IC;
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnApagar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JPanel butoes;
     private javax.swing.JPanel dados;
+    private javax.swing.JTextField ic;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField marca;
     private javax.swing.JTextField modelo;
     private javax.swing.JTable tabela;
