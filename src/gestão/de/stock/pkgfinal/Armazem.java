@@ -452,28 +452,7 @@ public final class Armazem extends javax.swing.JInternalFrame {
             comboNome.addItem(impressora);
         }
     }
-    
-    private int comboSplit(){
-        
-        String[] result =comboNome.getSelectedItem().toString().split("_");
-            String marca = result[0];
-            String modelo = result[1];
-        
-        try{
-             ResultSet rs;
-             int id = 0;
-             rs = stm.executeQuery("SELECT ID_Impressora FROM IMPRESSORA WHERE IMPRESSORA.MARCA = '"+marca+"' AND IMPRESSORA.Modelo = '"+modelo+"'");
-             while(rs.next())
-             {
-                id = rs.getInt(1);
-             }
-             return id;
-             
-        }catch(Exception exp){
-            return 0;
-        }
-        
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
