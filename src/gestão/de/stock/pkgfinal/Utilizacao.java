@@ -84,6 +84,8 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         btnAdicionar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnApagar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        analise = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(232, 236, 244));
         setBorder(null);
@@ -163,6 +165,11 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         jLabel6.setText("CONSUMIVEL");
 
         comboConsumivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboConsumivel.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboConsumivelItemStateChanged(evt);
+            }
+        });
 
         data.setMinimumSize(new java.awt.Dimension(5, 19));
         data.setOpaque(false);
@@ -277,7 +284,7 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
                         .addGap(5, 5, 5)
                         .addComponent(jLabel7))
                     .addComponent(comboLocalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         btnAdicionar.setText("Adicionar");
@@ -321,6 +328,16 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
                 .addComponent(btnApagar, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
         );
 
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        analise.setText("Análise");
+        analise.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                analiseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(analise, java.awt.BorderLayout.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -333,21 +350,23 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
                     .addComponent(butoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(dados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 67, Short.MAX_VALUE)))
+                        .addGap(0, 18, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(dados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(butoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12))
         );
@@ -364,7 +383,7 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
              
          
              //criar uma query e executar
-         ResultSet rs = stm.executeQuery("SELECT DISTINCT ID_UTILIZACAO, IC , QUANTIDADE, to_char(DATA_Util,'DD/MM/YYYY') DATA_Util, PRETO, COR, (MARCA || '' || MODELO || '_'|| NOME) AS CONSUMIVEL, LOCALIZACAO  FROM Utilizacao a, Consumivel b, centro_custo c, IC d, Impressora e WHERE a.ID_CONSUMIVEL = b.ID_CONSUMIVEL AND a.ID_CENTRO_CUSTO = c.ID_CENTRO_CUSTO AND b.ID_IMPRESSORA = e.ID_IMPRESSORA AND a.ID_IC = d.ID_IC");
+         ResultSet rs = stm.executeQuery("SELECT DISTINCT ID_UTILIZACAO, IC , QUANTIDADE, to_char(DATA_Util,'DD/MM/YYYY') DATA_Util, PRETO, COR, (MARCA || '_' || MODELO || '_'|| NOME) AS CONSUMIVEL, LOCALIZACAO  FROM Utilizacao a, Consumivel b, centro_custo c, IC d, Impressora e WHERE a.ID_CONSUMIVEL = b.ID_CONSUMIVEL AND a.ID_CENTRO_CUSTO = c.ID_CENTRO_CUSTO AND b.ID_IMPRESSORA = e.ID_IMPRESSORA AND a.ID_IC = d.ID_IC");
              
            while(rs.next())
            {
@@ -445,8 +464,7 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
         try{
              stm = c.fazerConexao().createStatement();
              
-stm.executeUpdate("UPDATE Utilizacao SET IC = '"+icEscolhe("ic","")+"' ,QUANTIDADE = '"+quantidade.getValue()+"' , DATA_UTIL = TO_DATE('"+DateFormat.getDateInstance().format(data.getDate())+"', 'DD/MM/YYYY') , PRETO = "+preto.getValue()+" , COR = "+cor.getValue()+" , ID_CONSUMIVEL ="+comboSplit("consumivel","")+", ID_CENTRO_CUSTO = "+comboSplit("centro_custo","")+" WHERE ID_UTILIZACAO = "+Integer.parseInt(value)+"");
-             
+             stm.executeUpdate("UPDATE Utilizacao SET QUANTIDADE = "+quantidade.getValue()+" , DATA_UTIL = TO_DATE('"+DateFormat.getDateInstance().format(data.getDate())+"', 'DD/MM/YYYY') , PRETO = "+preto.getValue()+" , COR = "+cor.getValue()+" , ID_CONSUMIVEL ="+comboSplit("consumivel")+", ID_CENTRO_CUSTO = "+comboSplit("centro_custo")+", ID_IC = "+comboSplit("impressora")+" WHERE ID_UTILIZACAO = "+Integer.parseInt(value)+"");
              
              JOptionPane.showMessageDialog(rootPane, "Dado editado com sucesso!");
                 
@@ -485,7 +503,7 @@ stm.executeUpdate("UPDATE Utilizacao SET IC = '"+icEscolhe("ic","")+"' ,QUANTIDA
                 int op = JOptionPane.showConfirmDialog(rootPane, "Tem a certeza?");
                  if(op == 0)
                  {
-                     ResultSet rs = stm.executeQuery("DELETE FROM Consumivel WHERE ID_CONSUMIVEL = "+Integer.parseInt(value));
+                     ResultSet rs = stm.executeQuery("DELETE FROM Utilizacao WHERE ID_UTILIZACAO = "+Integer.parseInt(value));
                      JOptionPane.showMessageDialog(rootPane, "Dado apagado com sucesso!");
                         tabelaUtilizacao();
                             tabela.clearSelection();
@@ -529,7 +547,8 @@ stm.executeUpdate("UPDATE Utilizacao SET IC = '"+icEscolhe("ic","")+"' ,QUANTIDA
         
         try {
              
-             //stm.executeUpdate("INSERT INTO Consumivel(NNA,NOME,UMC,Preco,Referencia,ID_Impressora) VALUES('"+ic.getText().toUpperCase()+"' , '"+quantidade.getText().toUpperCase()+"' , "+Integer.parseInt(data.getText())+" , "+Integer.parseInt(preto.getText())+" , "+Integer.parseInt(cor.getText())+" , "+comboSplit()+")");
+             stm.executeUpdate("INSERT INTO UTILIZACAO(QUANTIDADE,DATA_UTIL,PRETO,COR,ID_CONSUMIVEL,ID_CENTRO_CUSTO, ID_IC) VALUES("+quantidade.getValue()+" , TO_DATE('"+DateFormat.getDateInstance().format(data.getDate())+"', 'DD/MM/YYYY') , "+preto.getValue()+" , "+cor.getValue()+" , "+comboSplit("consumivel")+" , "+comboSplit("centro_custo")+", "+comboSplit("impressora")+")");
+             
              
              
              JOptionPane.showMessageDialog(rootPane, "Dado inserido com sucesso!");
@@ -569,6 +588,24 @@ stm.executeUpdate("UPDATE Utilizacao SET IC = '"+icEscolhe("ic","")+"' ,QUANTIDA
 */
     }//GEN-LAST:event_comboIcItemStateChanged
 
+    private void comboConsumivelItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboConsumivelItemStateChanged
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_comboConsumivelItemStateChanged
+
+    private void analiseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analiseActionPerformed
+        try {
+            // TODO add your handling code here:
+            
+            Pop_Up_Analise hm = new Pop_Up_Analise();
+            //Adicionar a nova página
+            hm.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Utilizacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_analiseActionPerformed
+
     public ArrayList lista(String x) throws Exception{
         ArrayList list = new ArrayList<>();
         ResultSet rs;
@@ -578,16 +615,7 @@ stm.executeUpdate("UPDATE Utilizacao SET IC = '"+icEscolhe("ic","")+"' ,QUANTIDA
         {
             case "consumivel" -> {
                 
-               rs = stm.executeQuery("SELECT (MARCA || '' || MODELO || '_'|| NOME) AS NOME FROM CONSUMIVEL a, IMPRESSORA b WHERE a.ID_IMPRESSORA = b.ID_IMPRESSORA ");
-
-            while(rs.next())
-            {
-                list.add(rs.getString("NOME"));
-            }
-            }
-            case "consumivelDif" -> {
-                
-               rs = stm.executeQuery("SELECT (MARCA || '' || MODELO || '_'|| NOME) AS NOME FROM CONSUMIVEL a, IMPRESSORA b WHERE a.ID_IMPRESSORA = b.ID_IMPRESSORA AND a.ID_IMPRESSORA = "+comboSplitId()+" ");
+               rs = stm.executeQuery("SELECT (MARCA || '_' || MODELO || '_'|| NOME) AS NOME FROM CONSUMIVEL a, IMPRESSORA b WHERE a.ID_IMPRESSORA = b.ID_IMPRESSORA");
 
             while(rs.next())
             {
@@ -632,7 +660,12 @@ stm.executeUpdate("UPDATE Utilizacao SET IC = '"+icEscolhe("ic","")+"' ,QUANTIDA
         }
     }
      
-    private int comboSplit(String x, String ic){
+    private int comboSplit(String x){
+        
+        String[] result =comboConsumivel.getSelectedItem().toString().split("_");
+            String marca = result[0];
+            String modelo = result[1];
+            String cons = result[2];
         
         try{
             ResultSet rs;
@@ -641,7 +674,7 @@ stm.executeUpdate("UPDATE Utilizacao SET IC = '"+icEscolhe("ic","")+"' ,QUANTIDA
             switch(x)
             {
                 case "consumivel" -> {
-                    rs = stm.executeQuery("SELECT ID_CONSUMIVEL FROM CONSUMIVEL WHERE NOME = '"+comboConsumivel.getSelectedItem()+"'");
+                    rs = stm.executeQuery("SELECT ID_CONSUMIVEL FROM CONSUMIVEL a, IMPRESSORA b WHERE NOME = '"+cons+"' AND MARCA = '"+marca+"' AND MODELO = '"+modelo+"'");
                     while(rs.next())
                     {
                         id = rs.getInt(1);
@@ -657,7 +690,7 @@ stm.executeUpdate("UPDATE Utilizacao SET IC = '"+icEscolhe("ic","")+"' ,QUANTIDA
                     
                 }
                 case "impressora" -> {
-                    rs = stm.executeQuery("SELECT ID_IC FROM IC WHERE IC = '"+ic+"'");
+                    rs = stm.executeQuery("SELECT ID_IC FROM IC WHERE IC = '"+comboIc.getSelectedItem()+"'");
                     while(rs.next())
                     {
                        id = rs.getInt(1);
@@ -678,57 +711,10 @@ stm.executeUpdate("UPDATE Utilizacao SET IC = '"+icEscolhe("ic","")+"' ,QUANTIDA
         }
     }
     
-    private int comboSplitId() throws SQLException{
-        
-     
-          String[] result =comboIc.getSelectedItem().toString().split("-");
-            String ic = result[0];
-        
-        try{
-             ResultSet rs;
-             int id = 0;
-             rs = stm.executeQuery("SELECT ID_IC FROM IC WHERE IC = '"+ic+"'");
-             while(rs.next())
-             {
-                id = rs.getInt(1);
-             }
-             return id;
-             
-        }catch(Exception exp){
-            return 0;
-        }
-            }
-    
-    
-    private String icEscolhe(String x, String ic) throws SQLException{
-         ResultSet rs;
-        
-        switch(x)
-        {
-            case "ic" -> {
-                rs = stm.executeQuery("SELECT IC FROM IC WHERE ID_IC= "+comboSplit("impressora",ic)+"");
-                while(rs.next())
-             return rs.getString("IC");
-         }
-            
-            case "marca" ->{
-                rs = stm.executeQuery("SELECT (marca|| '_' || modelo) AS IMPRESSORA FROM IMPRESSORA WHERE ID_IMPRESSORA = "+comboSplit("impressora",ic)+"");
-                while(rs.next())
-             return rs.getString("IMPRESSORA");
-         }
-             
-        }
-        return null;
-    }
-    
-    private void bb()
-    {
-        
-    }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PRETO;
+    private javax.swing.JButton analise;
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnApagar;
     private javax.swing.JButton btnEditar;
@@ -745,6 +731,7 @@ stm.executeUpdate("UPDATE Utilizacao SET IC = '"+icEscolhe("ic","")+"' ,QUANTIDA
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
