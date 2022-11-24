@@ -4,8 +4,16 @@
  */
 package gestão.de.stock.pkgfinal;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.awt.BorderLayout;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -13,10 +21,13 @@ import java.util.Date;
  */
 public class Analise extends javax.swing.JFrame {
     
-    Pop_Up_Analise pop;
+    ResultSet rs;
     String impressora;
     String dataInicio;
     String dataFim;
+    
+     Conexao c = new Conexao();
+        Statement stm = c.fazerConexao().createStatement();
 
     /**
      * Creates new form Analise
@@ -30,18 +41,79 @@ public class Analise extends javax.swing.JFrame {
         this.impressora = impressora;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
+        
         setLocationRelativeTo(null);
         
-    }
-    
-    public void criaGrafico()
-    {
+        
+        criaTabela();
+       criaGrafico();
+        
         
     }
     
-    public void criaTabela()
+    private void criaGrafico() throws SQLException
     {
         
+         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+         
+         rs = stm.executeQuery(query());
+         
+         while(rs.next())
+         {
+             dataset.setValue(rs.getInt("PRETO"), "Preto&Branco", rs.getString("DATA_UTIL"));
+             dataset.setValue(rs.getInt("COR"), "Cores", rs.getString("DATA_UTIL"));
+         
+         }
+         
+         
+         
+         JFreeChart grafico = ChartFactory.createBarChart3D("Análise: "+impressora+" || Entre: "+dataInicio+" - "+dataFim,"Data", "Impressões", dataset);
+         grafico.setAntiAlias(false);
+         ChartPanel panel = new ChartPanel(grafico);
+         panel.setBackground(tabela.getBackground());
+         
+         
+         painelGrafico.setLayout(new java.awt.BorderLayout());
+         painelGrafico.add(panel, BorderLayout.CENTER);
+         painelGrafico.validate();
+         
+    }
+    
+    private void criaTabela() throws Exception
+    {
+        try{
+             //definir a tabela
+             DefaultTableModel table = (DefaultTableModel) tabela.getModel();
+             table.setRowCount(0);
+             
+             //criar uma query e executar
+                rs = stm.executeQuery(query());
+             
+         
+           while(rs.next())
+           {
+               //passar os dados da BD para um object
+               Object o[] = {rs.getString("DATA_Util"),rs.getString("IC"),
+                    rs.getString("MARCA"), rs.getString("MODELO"), rs.getString("CONSUMIVEL"), rs.getInt("QUANTIDADE"),
+                    rs.getInt("PRETO"), rs.getString("COR"), rs.getString("LOCALIZACAO"), rs.getString("CUSTO")};
+               //Adicionar os dados à tabela
+               table.addRow(o);
+         }
+         }
+       catch(SQLException exp)
+       {
+           throw new Exception (exp.getMessage());
+       }
+    }
+    
+    public String query()
+    {
+        return "SELECT DISTINCT to_char(DATA_Util,'DD/MM/YYYY') DATA_Util, IC , MARCA, MODELO, NOME AS CONSUMIVEL, QUANTIDADE, PRETO, COR, LOCALIZACAO, CUSTO "+ 
+                    "FROM Utilizacao a, Consumivel b, centro_custo c, IC d, Impressora e "+
+                    "WHERE a.ID_CONSUMIVEL = b.ID_CONSUMIVEL "+
+                    "AND a.ID_CENTRO_CUSTO = c.ID_CENTRO_CUSTO AND b.ID_IMPRESSORA = e.ID_IMPRESSORA AND a.ID_IC =d.ID_IC "+
+                    "AND d.IC = '"+impressora+"' AND a.DATA_UTIL BETWEEN to_date('"+dataInicio+"', 'DD/MM/YYYY') AND to_date('"+dataFim+"','DD/MM/YYYY') "+
+                "ORDER BY DATA_Util";
     }
     
     /**
@@ -57,7 +129,8 @@ public class Analise extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(232, 236, 244));
 
         javax.swing.GroupLayout painelGraficoLayout = new javax.swing.GroupLayout(painelGrafico);
         painelGrafico.setLayout(painelGraficoLayout);
@@ -67,47 +140,52 @@ public class Analise extends javax.swing.JFrame {
         );
         painelGraficoLayout.setVerticalGroup(
             painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 523, Short.MAX_VALUE)
         );
 
+        tabela.setAutoCreateRowSorter(true);
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "IC", "Marca", "Modelo", "Consumivel", "Quantidade", "Preto", "Cor", "Localizacao", "Centro_Custo"
+                "Data", "IC", "Marca", "Modelo", "Consumivel", "Quantidade", "Preto", "Cor", "Localizacao", "Centro_Custo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tabela.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tabela.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         jScrollPane1.setViewportView(tabela);
+        if (tabela.getColumnModel().getColumnCount() > 0) {
+            tabela.getColumnModel().getColumn(5).setPreferredWidth(10);
+            tabela.getColumnModel().getColumn(6).setPreferredWidth(10);
+            tabela.getColumnModel().getColumn(7).setPreferredWidth(10);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 961, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(painelGrafico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(painelGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();

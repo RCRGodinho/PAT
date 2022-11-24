@@ -177,7 +177,7 @@ public class Pop_Up_Analise extends javax.swing.JFrame {
             this.dispose();
             
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, "Todos os campos têm que ser preenchidos!");
+            JOptionPane.showMessageDialog(rootPane, "Todos os campos têm que ser preenchidos!"+ex);
         }
     }//GEN-LAST:event_pesquisarActionPerformed
 

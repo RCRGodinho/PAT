@@ -28,7 +28,7 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
     
     Conexao c = new Conexao();
         Statement stm = c.fazerConexao().createStatement();
-    boolean en = false;
+        
     
     
     public Utilizacao() throws Exception {
@@ -523,7 +523,6 @@ public final class Utilizacao extends javax.swing.JInternalFrame {
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         try {
             // TODO add your handling code here:
-           en = true;
             buscarDados();
         } catch (ParseException | SQLException ex) {
             Logger.getLogger(Utilizacao.class.getName()).log(Level.SEVERE, null, ex);
